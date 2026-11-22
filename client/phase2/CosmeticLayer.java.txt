@@ -1,0 +1,41 @@
+package dev.yaclient.cosmetics;
+
+import dev.yaclient.Cosmetics;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.util.ResourceLocation;
+
+/**
+ * SKELETON: draws the equipped cosmetics on the local player.
+ * Each slot has its own model + texture; keep models tiny (a few boxes) for performance.
+ */
+public class CosmeticLayer implements LayerRenderer<AbstractClientPlayer> {
+    private final RenderPlayer renderer;
+    // private final WingsModel wings = new WingsModel();   // two ModelRenderer planes
+    // private final CapeModel cape = new CapeModel();
+    // private final HatModel hat = new HatModel();
+    // private final BandanaModel bandana = new BandanaModel();
+
+    public CosmeticLayer(RenderPlayer renderer) { this.renderer = renderer; }
+
+    @Override
+    public void doRenderLayer(AbstractClientPlayer player, float limbSwing, float limbSwingAmount,
+                              float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        if (player != Minecraft.getMinecraft().thePlayer) return; // local player only (see docs/PHASE2.md)
+
+        String wingsItem = Cosmetics.equipped("wings");
+        if (!wingsItem.equals("none")) {
+            renderer.bindTexture(new ResourceLocation("yaclient", "textures/cosmetics/" + wingsItem + ".png"));
+            GlStateManager.pushMatrix();
+            // wings.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+            GlStateManager.popMatrix();
+        }
+        // same pattern for "cape", "hat" and "bandana"
+    }
+
+    @Override
+    public boolean shouldCombineTextures() { return false; }
+}

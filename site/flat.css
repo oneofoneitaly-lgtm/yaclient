@@ -1,0 +1,10 @@
+/* Flat grey theme shared with the home page (colors only). Loaded by store and plus. */
+:root{--bg:#25262d;--s1:#2e2f38;--s2:#383945;--line:#3c3d49;--line2:#4a4b58;--mute:#aeb0bd;--dim:#80828f}
+nav.top.sc{background:rgba(37,38,45,.92)}
+nav.top{background:rgba(37,38,45,.85)}
+.skinbox input,.pbf input{background:var(--s2)}
+/* soft white glows in the background */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(60vw 50vh at 12% 8%,rgba(255,255,255,.10),transparent 70%),
+radial-gradient(55vw 55vh at 92% 30%,rgba(255,255,255,.07),transparent 70%),
+radial-gradient(70vw 60vh at 40% 100%,rgba(255,255,255,.08),transparent 70%)}

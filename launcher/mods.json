@@ -1,0 +1,946 @@
+{
+ "_help": "Each mod lists the Minecraft versions it works on. Specs: \"1.8.9\" (exact), \"1.8.x\" (any 1.8), \">=1.12\", \"*\" (all). Add a version here when a mod gets ported.",
+ "mods": [
+  {
+   "id": "old_animations",
+   "name": "1.7 Animations",
+   "desc": "Sword block-hit and lower sword like 1.7",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "gapple_timer",
+   "name": "Absorption",
+   "desc": "Absorption hearts left after a golden apple",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "armor",
+   "name": "Armor Status",
+   "desc": "Armor and held item durability",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": true
+  },
+  {
+   "id": "armor_warning",
+   "name": "Armor Warning",
+   "desc": "Warns when an armor piece is about to break",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "auto_reconnect",
+   "name": "Auto Reconnect",
+   "desc": "Reconnects to the same server after a kick or lost connection",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "autogg",
+   "name": "AutoGG",
+   "desc": "Say GG when a game ends",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "bg_fps",
+   "name": "Background FPS",
+   "desc": "Limits FPS when the game is in the background",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "bw_blocks",
+   "name": "BedWars Blocks",
+   "desc": "How many blocks you can still place (red when low)",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "bw_resources",
+   "name": "BedWars Resources",
+   "desc": "Iron, gold, diamonds and emeralds you carry",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "bw_threat",
+   "name": "BedWars Threat",
+   "desc": "Closest enemy with his weapon and armor",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "biome",
+   "name": "Biome",
+   "desc": "Name of the biome you are in",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "block_info",
+   "name": "Block Info",
+   "desc": "Name and position of the block you look at",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "block_outline",
+   "name": "Block Outline",
+   "desc": "Your own outline around the block you look at",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "block_place",
+   "name": "Block Place Count",
+   "desc": "Blocks you place per second",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "bow_charge",
+   "name": "Bow Charge",
+   "desc": "Shows how charged your bow is",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "callouts",
+   "name": "Callouts",
+   "desc": "Keys that send quick messages to your team chat",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "chat",
+   "name": "Chat",
+   "desc": "Remove the chat background and resize the chat",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "chat_tweaks",
+   "name": "Chat Tweaks",
+   "desc": "Fold repeats, hide words, nickname instead of your name",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "cinematic",
+   "name": "Cinematic Camera",
+   "desc": "Smooth camera movement",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "clear_weather",
+   "name": "Clear Weather",
+   "desc": "Hide rain and thunder",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "click_counter",
+   "name": "Click Counter",
+   "desc": "Counts every click you make",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "clip",
+   "name": "Clip Marker",
+   "desc": "Press a key to mark a moment (screenshot + time note)",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "clock",
+   "name": "Clock",
+   "desc": "Your computer time",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "combo",
+   "name": "Combo",
+   "desc": "Counts your consecutive hits",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "coords",
+   "name": "Coordinates",
+   "desc": "Your X, Y, Z position",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "cps",
+   "name": "CPS",
+   "desc": "Clicks per second (left | right)",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": true
+  },
+  {
+   "id": "crit_counter",
+   "name": "Crit Counter",
+   "desc": "Critical hits you landed and the percentage",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "crosshair",
+   "name": "Crosshair",
+   "desc": "Custom crosshair styles",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "custom_text",
+   "name": "Custom Text",
+   "desc": "Any text you want on screen",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "days",
+   "name": "Day Counter",
+   "desc": "Shows the current world day",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "direction",
+   "name": "Direction",
+   "desc": "Compass heading",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "discord_rpc",
+   "name": "Discord Presence",
+   "desc": "Show what you play on Discord",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "entities",
+   "name": "Entity Count",
+   "desc": "Loaded entities around you",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "facing",
+   "name": "Facing",
+   "desc": "The direction you look at, written out",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "fall",
+   "name": "Fall Distance",
+   "desc": "How far you have fallen",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "food",
+   "name": "Food",
+   "desc": "Food level and saturation",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "fov",
+   "name": "FOV Changer",
+   "desc": "Any field of view, even above 110",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "fps",
+   "name": "FPS",
+   "desc": "Frames per second",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": true
+  },
+  {
+   "id": "fps_boost",
+   "name": "FPS Boost",
+   "desc": "Lowers heavy effects to raise your FPS",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": true
+  },
+  {
+   "id": "freelook",
+   "name": "Free Look",
+   "desc": "Hold the key (Options > Controls > YA Client) and look around without turning your player",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": true
+  },
+  {
+   "id": "fullbright",
+   "name": "Fullbright",
+   "desc": "Gamma control, always bright",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "health",
+   "name": "Health",
+   "desc": "Your hit points",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "hit_color",
+   "name": "Hit Color",
+   "desc": "Tints a player in your color when they get hit",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "hit_ratio",
+   "name": "Hit Ratio",
+   "desc": "Hits landed against hits taken (green when winning)",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "hitboxes",
+   "name": "Hitboxes",
+   "desc": "Show entity hitboxes",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "game_time",
+   "name": "In Game Time",
+   "desc": "The Minecraft clock",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "inventory_hud",
+   "name": "Inventory HUD",
+   "desc": "Shows your inventory on screen",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "item_counter",
+   "name": "Item Counter",
+   "desc": "Pearls, golden apples, potions and arrows",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "item_info",
+   "name": "Item Info",
+   "desc": "Durability or count of the held item",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "item_lore",
+   "name": "Item Lore",
+   "desc": "Name and lore of the item in your hand",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "item_tracker",
+   "name": "Item Tracker",
+   "desc": "Items you just picked up or used",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "keystrokes",
+   "name": "Keystrokes",
+   "desc": "WASD, mouse and space overlay",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": true
+  },
+  {
+   "id": "kill_streak",
+   "name": "Kill Streak",
+   "desc": "Kills this session and your current streak",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "levelhead",
+   "name": "Levelhead",
+   "desc": "Player levels above nametags",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "soon": true,
+   "def": false
+  },
+  {
+   "id": "light",
+   "name": "Light Level",
+   "desc": "Light level at your position",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "low_health",
+   "name": "Low Health",
+   "desc": "Red pulsing warning when your health is low",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "mechvibes",
+   "name": "Mechvibes",
+   "desc": "Mechanical keyboard sounds (Cherry MX) and mouse clicks",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "memory",
+   "name": "Memory",
+   "desc": "RAM used by the game",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "minimap",
+   "name": "Minimap",
+   "desc": "Top-down map of the terrain around you",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "motion_blur",
+   "name": "Motion Blur",
+   "desc": "Smooth trail on fast movement",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "mouse_strokes",
+   "name": "Mouse Strokes",
+   "desc": "A dot that follows your mouse movement",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "nearby_players",
+   "name": "Nearby Players",
+   "desc": "List of players close to you",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "no_clouds",
+   "name": "No Clouds",
+   "desc": "Removes the clouds from the sky",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "no_hurt_cam",
+   "name": "No Hurt Cam",
+   "desc": "Removes the camera shake when hit",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "pack_info",
+   "name": "Pack Info",
+   "desc": "Name and logo of your resource pack",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "perspective_lock",
+   "name": "Perspective Lock",
+   "desc": "Keeps the camera on first, back or front view",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "ping",
+   "name": "Ping",
+   "desc": "Latency to the server",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "players",
+   "name": "Player Count",
+   "desc": "Players currently online on the server",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "player_head",
+   "name": "Player Head",
+   "desc": "Your head from your skin",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "player_preview",
+   "name": "Player Preview",
+   "desc": "A small 3D copy of your player",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "potion_alert",
+   "name": "Potion Alert",
+   "desc": "Warns before a potion effect runs out",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "potions",
+   "name": "Potion Status",
+   "desc": "Active effects and timers",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "reach",
+   "name": "Reach Display",
+   "desc": "Distance to the target (info only)",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "replay_buffer",
+   "name": "Replay Buffer",
+   "desc": "Keeps the last seconds as pictures and saves them on a key",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "rotation",
+   "name": "Rotation",
+   "desc": "Your yaw and pitch",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "saturation",
+   "name": "Saturation",
+   "desc": "Your food saturation level",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "scoreboard",
+   "name": "Scoreboard",
+   "desc": "Show or hide the sidebar scoreboard; move and resize it",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": true
+  },
+  {
+   "id": "server_ip",
+   "name": "Server Address",
+   "desc": "Address of the server you are playing on",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "session",
+   "name": "Session Time",
+   "desc": "How long you have been playing",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "shape",
+   "name": "Shape",
+   "desc": "A coloured box you can place anywhere",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "smooth_shift",
+   "name": "Smooth Shift",
+   "desc": "Smooth camera when you sneak (shift)",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "speed",
+   "name": "Speed",
+   "desc": "Blocks per second",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "spotify",
+   "name": "Spotify",
+   "desc": "Now playing (Spotify desktop app)",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "streamer_mode",
+   "name": "Streamer Mode",
+   "desc": "Hides coordinates and server address on the HUD and scoreboard",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "target_hud",
+   "name": "Target HUD",
+   "desc": "Name and health of the player you fight",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "team_viewer",
+   "name": "Team Viewer",
+   "desc": "A green arrow above your teammates, so you always see where they are",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "time_changer",
+   "name": "Time Changer",
+   "desc": "Set the time of day (visual only)",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "toggle_sneak",
+   "name": "Toggle Sneak",
+   "desc": "Press once to sneak",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "toggle_sprint",
+   "name": "Toggle Sprint",
+   "desc": "Automatic sprint",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": true
+  },
+  {
+   "id": "void_alert",
+   "name": "Void Alert",
+   "desc": "Shows VOID when there is no block under you",
+   "category": "pvp",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "waypoints",
+   "name": "Waypoints",
+   "desc": "B saves a point, N removes the nearest",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "weather",
+   "name": "Weather",
+   "desc": "Clear, rain or thunder",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "xp",
+   "name": "XP Level",
+   "desc": "Your experience level",
+   "category": "info",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": false
+  },
+  {
+   "id": "zoom",
+   "name": "Zoom",
+   "desc": "Hold C to zoom in",
+   "category": "utility",
+   "versions": [
+    "1.8.9"
+   ],
+   "def": true
+  }
+ ]
+}

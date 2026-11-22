@@ -1,0 +1,21 @@
+package dev.yaclient.mixin;
+
+import net.minecraft.client.renderer.ItemRenderer;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+/**
+ * SKELETON: 1.7-style blocking. In the BLOCK case 1.8 calls transformFirstPersonItem(equip, 0.0F),
+ * which freezes the swing. Passing the real swing progress restores the 1.7 "swing while blocking".
+ */
+@Mixin(ItemRenderer.class)
+public abstract class ItemRendererMixin {
+    @ModifyArg(method = "renderItemInFirstPerson",
+               at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemRenderer;transformFirstPersonItem(FF)V", ordinal = 1),
+               index = 1)
+    private float yaclient$swingWhileBlocking(float original) {
+        // return the swing progress local variable here (capture it with @Local or a @Redirect)
+        return original;
+    }
+}

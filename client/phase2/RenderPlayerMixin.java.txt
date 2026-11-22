@@ -1,0 +1,19 @@
+package dev.yaclient.mixin;
+
+import dev.yaclient.cosmetics.CosmeticLayer;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+/** SKELETON: registers the cosmetics layer on the player renderer (default and slim models). */
+@Mixin(RenderPlayer.class)
+public abstract class RenderPlayerMixin {
+    @Inject(method = "<init>(Lnet/minecraft/client/renderer/entity/RenderManager;Z)V", at = @At("RETURN"))
+    private void yaclient$addCosmetics(RenderManager manager, boolean smallArms, CallbackInfo ci) {
+        // addLayer is protected in RendererLivingEntity: use an @Invoker accessor or an access widener
+        ((dev.yaclient.mixin.LayerAccess) this).yaclient$addLayer(new CosmeticLayer((RenderPlayer) (Object) this));
+    }
+}

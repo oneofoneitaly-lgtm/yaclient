@@ -1,0 +1,8 @@
+{
+  "name": "ya-client-store-backend",
+  "version": "1.0.0",
+  "description": "Cosmetics store backend for YA CLIENT (ownership, equip, public lookup)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}

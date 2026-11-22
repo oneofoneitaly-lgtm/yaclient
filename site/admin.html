@@ -1,0 +1,186 @@
+<!doctype html><html lang="en"><head><meta name="robots" content="noindex"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin - YA CLIENT</title><link rel="icon" href="/logo.png">
+<style>
+@font-face{font-family:Inter;font-weight:400;src:url(fonts/Inter-Regular.otf) format("opentype")}
+@font-face{font-family:Inter;font-weight:600;src:url(fonts/Inter-SemiBold.otf) format("opentype")}
+@font-face{font-family:Inter;font-weight:800;src:url(fonts/Inter-ExtraBold.otf) format("opentype")}
+:root{--bg:#09090b;--s:#111115;--s2:#17171c;--s3:#1f1f26;--line:#222228;--line2:#2e2e36;--text:#f4f4f5;--mute:#8b8b95;--dim:#5c5c66;--red:#e10600;--ok:#34d27b;--warn:#ffc21a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+button,input,select{font:inherit;color:inherit}
+.hide{display:none!important}
+/* login */
+#login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.lbox{width:100%;max-width:380px;background:var(--s);border:1px solid var(--line);border-radius:16px;padding:28px}
+.lbox img{width:44px;height:44px;margin-bottom:14px}
+.lbox h1{font-size:20px;font-weight:800;letter-spacing:.3px}.lbox h1 b{color:var(--red)}
+.lbox p{color:var(--mute);margin:6px 0 18px}
+/* app */
+#app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+aside{background:var(--s);border-right:1px solid var(--line);padding:18px 12px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 10px 16px;font-weight:800;letter-spacing:.4px}.brand img{width:30px;height:30px}.brand b{color:var(--red)}
+.brand small{display:block;color:var(--dim);font-weight:400;letter-spacing:0;font-size:11px}
+.nav{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;color:var(--mute);cursor:pointer;border:0;background:none;text-align:left;width:100%}
+.nav:hover{background:var(--s2);color:var(--text)}.nav.on{background:var(--s3);color:var(--text)}
+.nav svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.sp{flex:1}
+main{padding:26px 30px 60px;max-width:1100px;width:100%}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.top h2{font-size:22px;font-weight:800}.top p{color:var(--mute)}
+.btn{background:var(--s3);border:1px solid var(--line2);border-radius:9px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:#44444f;background:#26262e}
+.btn.pri{background:var(--text);color:#101014;border-color:var(--text);font-weight:600}.btn.pri:hover{background:#fff}
+.btn.red{background:rgba(225,6,0,.12);border-color:rgba(225,6,0,.4);color:#ff6b66}.btn.red:hover{background:rgba(225,6,0,.2)}
+.btn.sm{padding:5px 10px;font-size:12.5px}
+input,select{background:var(--bg);border:1px solid var(--line2);border-radius:9px;padding:9px 12px;width:100%;outline:0}
+input:focus,select:focus{border-color:#5a5a66}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.card{background:var(--s);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.card .k{color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.6px}.card .v{font-size:28px;font-weight:800;margin-top:4px}.card .s{color:var(--dim);font-size:12px}
+.panel{background:var(--s);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.panel h3{font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:0 0 auto}.row>.grow{flex:1 1 200px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+table{width:100%;border-collapse:collapse}
+td,th{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+tr.click{cursor:pointer}tr.click:hover td{background:var(--s2)}
+.chip{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12px;background:var(--s3);border:1px solid var(--line2);margin:2px 4px 2px 0}
+.chip.ok{color:var(--ok);border-color:rgba(52,210,123,.35)}.chip.gold{color:#101014;background:var(--warn);border-color:var(--warn);font-weight:600}.chip.bad{color:#ff6b66;border-color:rgba(225,6,0,.4)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:6px}.dot.off{background:var(--dim)}
+.muted{color:var(--mute)}.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:8px 12px;margin-bottom:6px}.kv span:nth-child(odd){color:var(--mute)}
+#toast{position:fixed;right:20px;bottom:20px;display:grid;gap:8px;z-index:20}
+.t{background:var(--s3);border:1px solid var(--line2);border-radius:10px;padding:10px 14px;box-shadow:0 8px 30px #0008;max-width:340px}
+.t.ok{border-color:rgba(52,210,123,.5)}.t.err{border-color:rgba(225,6,0,.6)}
+.log{max-height:260px;overflow:auto;font-size:12.5px}.log div{padding:6px 0;border-bottom:1px solid var(--line);color:var(--mute)}.log b{color:var(--text);font-weight:600}
+.pkt{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.pkt button{background:var(--s2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer;color:var(--mute);font-size:12.5px}.pkt button.on{background:var(--text);color:#101014;border-color:var(--text);font-weight:600}
+.pk{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px;max-height:470px;overflow:auto;padding:2px}
+.pc{background:var(--s2);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;position:relative}.pc:hover{border-color:#4a4a55}
+.pc img,.pc .ph{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0b0e}.pc .ph{display:grid;place-items:center;font-weight:800;font-size:22px;background:linear-gradient(135deg,#e10600,#3a3a44)}
+.pc span{display:block;padding:6px 9px;font-size:12px;line-height:1.3}.pc.on{border-color:var(--text);box-shadow:0 0 0 1px var(--text)}
+.pc.on:after{content:"";position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:50%;background:var(--ok) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat}
+.selbar{display:flex;align-items:center;gap:12px;margin:10px 0 0;color:var(--mute)}.selbar img{width:64px;height:48px;object-fit:cover;border-radius:8px;border:1px solid var(--line2)}.selbar b{color:var(--text)}
+@media(max-width:860px){#app{grid-template-columns:1fr}aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--line)}.brand{width:100%}.sp{display:none}.cards{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}main{padding:18px 14px 50px}}
+</style></head><body>
+
+<div id="login"><form class="lbox" id="lf"><img src="/logo.png" alt=""><h1>YA <b>CLIENT</b> Admin</h1><p>Private area. Enter your admin key to continue.</p>
+<input id="key" type="password" placeholder="Admin key" autocomplete="current-password" autofocus><div style="height:12px"></div><button class="btn pri" style="width:100%" type="submit">Sign in</button><div class="muted" id="lerr" style="margin-top:12px;color:#ff6b66"></div></form></div>
+
+<div id="app" class="hide">
+<aside><div class="brand"><img src="/logo.png" alt=""><div>YA <b>CLIENT</b><small>Admin console</small></div></div>
+<button class="nav on" data-p="ov"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overview</button>
+<button class="nav" data-p="pl"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><path d="M17 4a4 4 0 010 8M22 21c0-3-2-5.5-5-6.5"/></svg>Players</button>
+<button class="nav" data-p="on"><svg viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0"/><circle cx="12" cy="19.5" r="1"/></svg>Online now</button>
+<button class="nav" data-p="sy"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>System</button>
+<div class="sp"></div>
+<a class="nav" href="/store" target="_blank"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.5 11h11L21 7H6"/><circle cx="9" cy="19" r="1.3"/><circle cx="17" cy="19" r="1.3"/></svg>Store</a>
+<button class="nav" id="out"><svg viewBox="0 0 24 24"><path d="M9 4H5a2 2 0 00-2 2v12a2 2 0 002 2h4M16 8l4 4-4 4M20 12H9"/></svg>Sign out</button></aside>
+
+<main>
+<section id="p-ov"><div class="top"><div><h2>Overview</h2><p>Live numbers from the YA CLIENT backend.</p></div><button class="btn" id="rf">Refresh</button></div>
+<div class="cards"><div class="card"><div class="k">Players</div><div class="v" id="c-reg">-</div><div class="s">known accounts</div></div>
+<div class="card"><div class="k">Online now</div><div class="v" id="c-on">-</div><div class="s">in game or launcher</div></div>
+<div class="card"><div class="k">Linked devices</div><div class="v" id="c-lk">-</div><div class="s">accounts locked to a PC</div></div>
+<div class="card"><div class="k">Database</div><div class="v" id="c-kv">-</div><div class="s" id="c-beta"></div></div></div>
+<div class="grid2" style="grid-template-columns:1.3fr 1fr"><div class="panel"><h3>Quick grant</h3><div class="row"><input class="grow" id="qg-u" placeholder="Minecraft username"><button class="btn pri" id="qg-go">Grant</button></div><div style="height:12px"></div><div id="qg-pk"></div><div class="muted" style="margin-top:10px">For full control open the player from the Players tab.</div></div>
+<div class="panel"><h3>Recent actions <button class="btn sm" id="log-clear">Clear</button></h3><div class="log" id="log"><div>No actions yet in this session.</div></div></div></div></section>
+
+<section id="p-pl" class="hide"><div class="top"><div><h2>Players</h2><p>Search by name, open a player to manage cosmetics, YA Plus and device lock.</p></div></div>
+<div class="panel"><div class="row"><input class="grow" id="q" placeholder="Search by Minecraft name (start of the name)" autocomplete="off"><button class="btn pri" id="q-go">Search</button></div><div class="row" style="margin-top:10px"><label class="muted" style="display:flex;gap:8px;align-items:center;cursor:pointer"><input type="checkbox" id="q-sp"> Show non-premium (SP) players instead</label></div></div>
+<div class="panel" id="plist"><div class="muted">Loading...</div></div>
+<div class="panel hide" id="pd"></div></section>
+
+<section id="p-on" class="hide"><div class="top"><div><h2>Online now</h2><p>Players currently running YA CLIENT or the launcher.</p></div><button class="btn" id="on-rf">Refresh</button></div><div class="panel" id="onl"></div></section>
+
+<section id="p-sy" class="hide"><div class="top"><div><h2>System</h2><p>Health of the backend and the services it depends on.</p></div></div>
+<div class="panel"><h3>Backend</h3><div class="kv" id="sy-kv"></div></div>
+<div class="panel"><h3>Mojang reachability <button class="btn sm" id="st">Run test</button></h3><div class="muted" id="st-out">Checks whether the server can reach Mojang's services.</div></div>
+<div class="panel"><h3>Shortcuts</h3><div class="row"><a class="btn" href="/store" target="_blank">Open store</a><a class="btn" href="/plus" target="_blank">YA Plus page</a><a class="btn" href="/changelogs" target="_blank">Changelogs</a></div></div></section>
+</main></div>
+<div id="toast"></div>
+
+<script src="/singles.js"></script>
+<script>
+var KEY="",$=function(i){return document.getElementById(i)},BUNDLES=["beta","mono","qlux","sakura","shinobi","kitsune","santa","frost","clown","luck"],PREF={beta:"ya"},SLOTS=["cape","wings","bandana","pet"];
+var NAMES={beta:"Beta Tester",mono:"Monochrome",qlux:"Qlux (partner)",sakura:"Sakura",shinobi:"Shinobi",kitsune:"Kitsune",santa:"Santa",frost:"Frost",clown:"Clown",luck:"Luck"};
+function pre(b){return PREF[b]||b}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function toast(m,ok){var d=document.createElement("div");d.className="t "+(ok?"ok":"err");d.textContent=m;$("toast").appendChild(d);setTimeout(function(){d.remove()},4200)}
+function api(path,opt){opt=opt||{};opt.headers={"x-admin-key":KEY};return fetch(path,opt).then(function(r){return r.json().then(function(d){if(r.status===403)throw new Error("forbidden");return d})})}
+function post(path,obj){return api(path,{method:"POST",body:new URLSearchParams(obj)})}
+var LOG=[];try{LOG=JSON.parse(sessionStorage.getItem("ya_log")||"[]")}catch(e){}
+function addLog(t){LOG.unshift({t:Date.now(),m:t});LOG=LOG.slice(0,40);try{sessionStorage.setItem("ya_log",JSON.stringify(LOG))}catch(e){}drawLog()}
+function drawLog(){$("log").innerHTML=LOG.length?LOG.map(function(l){var d=new Date(l.t);return"<div><b>"+d.toLocaleTimeString()+"</b>  "+esc(l.m)+"</div>"}).join(""):"<div>No actions yet in this session.</div>"}
+$("log-clear").onclick=function(){LOG=[];try{sessionStorage.removeItem("ya_log")}catch(e){}drawLog()};
+
+/* login */
+function enter(k){KEY=k;return api("/v1/admin/overview").then(function(d){if(d.error)throw new Error("forbidden");try{sessionStorage.setItem("ya_k",k)}catch(e){}$("login").classList.add("hide");$("app").classList.remove("hide");fillOv(d);loadPlayers();drawLog();fillSel()}).catch(function(e){KEY="";$("lerr").textContent=e.message==="forbidden"?"Wrong admin key.":"Cannot reach the server.";throw e})}
+$("lf").onsubmit=function(e){e.preventDefault();$("lerr").textContent="";enter($("key").value.trim()).catch(function(){})};
+$("out").onclick=function(){try{sessionStorage.removeItem("ya_k")}catch(e){}location.reload()};
+try{var sk=sessionStorage.getItem("ya_k");if(sk)enter(sk).catch(function(){})}catch(e){}
+
+/* nav */
+document.querySelectorAll(".nav[data-p]").forEach(function(b){b.onclick=function(){document.querySelectorAll(".nav[data-p]").forEach(function(x){x.classList.toggle("on",x===b)});["ov","pl","on","sy"].forEach(function(p){$("p-"+p).classList.toggle("hide",p!==b.dataset.p)});if(b.dataset.p==="on")loadOnline();if(b.dataset.p==="sy")loadOv()}});
+
+/* overview */
+function cnt(o){return o.n+(o.more?"+":"")}
+function fillOv(d){$("c-reg").textContent=cnt(d.registered);$("c-on").textContent=cnt(d.online);$("c-lk").textContent=cnt(d.linked);$("c-kv").textContent=d.kv==="ok"?"Healthy":"Error";$("c-kv").style.color=d.kv==="ok"?"var(--ok)":"#ff6b66";$("c-beta").textContent=d.beta_open?"Open beta: everyone owns everything":"Normal mode";
+ $("sy-kv").innerHTML="<span>Database (KV)</span><span>"+(d.kv==="ok"?'<span class="chip ok">read/write ok</span>':'<span class="chip bad">FAILED</span>')+"</span><span>Mode</span><span>"+(d.beta_open?'<span class="chip gold">Open beta</span>':'<span class="chip">Normal</span>')+"</span><span>Catalog</span><span>"+d.items+" items, "+d.bundles.length+" bundles</span><span>Server time</span><span class='mono'>"+esc(d.time)+"</span>"}
+function loadOv(){return api("/v1/admin/overview").then(fillOv).catch(function(){toast("Could not load the overview",false)})}
+$("rf").onclick=loadOv;
+
+/* grant helpers */
+function itemOptions(){var h="<optgroup label='Bundles'>";BUNDLES.forEach(function(b){h+="<option value='"+b+"'>"+NAMES[b]+" bundle</option>"});h+="</optgroup><optgroup label='Everything'><option value='*'>All cosmetics</option></optgroup><optgroup label='Single items'>";BUNDLES.forEach(function(b){SLOTS.forEach(function(s){h+="<option value='"+pre(b)+"_"+s+"'>"+NAMES[b]+" "+s+"</option>"})});return h+"</optgroup>"}
+var SLN={cape:"Cape",wings:"Wings",bandana:"Bandana",pet:"Pet"};
+function imgOf(v){if(v==="*")return"";if(SG[v])return"/b/i/"+v+".jpg";if(BUNDLES.indexOf(v)>=0)return"/b/"+v+"-2.jpg";return"/b/i/"+v+".jpg"}
+var SG={};(window.YA_SINGLES||[]).forEach(function(x){SG[x[0]]=x});
+function nameOf(v){if(SG[v])return SG[v][1];if(v==="*")return"All cosmetics";if(BUNDLES.indexOf(v)>=0)return NAMES[v]+" bundle";var p=v.split("_"),b=BUNDLES.filter(function(x){return pre(x)===p[0]})[0];return(b?NAMES[b]:v)+" "+(SLN[p[1]]||"").toLowerCase()}
+function mkPicker(el){var st={v:"beta",tab:"bundles",q:""};var tabs=[["bundles","Bundles"],["cape","Capes"],["wings","Wings"],["bandana","Bandanas"],["pet","Pets"]];
+ function draw(){var h="<div class='pkt'>"+tabs.map(function(t){return"<button type='button' data-t='"+t[0]+"' class='"+(st.tab===t[0]?"on":"")+"'>"+t[1]+"</button>"}).join("")+"</div>"+(st.tab==="bundles"?"":"<input class='pq' placeholder='Search (e.g. vampire, geometric, storm)' value='"+esc(st.q)+"' style='width:100%;margin:8px 0'>")+"<div class='pk'>";
+  var list=st.tab==="bundles"?BUNDLES.concat(["*"]):BUNDLES.map(function(b){return pre(b)+"_"+st.tab}).concat((window.YA_SINGLES||[]).filter(function(x){return x[2]===st.tab}).map(function(x){return x[0]}));
+  if(st.q){var qq=st.q.toLowerCase();list=list.filter(function(v){return nameOf(v).toLowerCase().indexOf(qq)>=0||v.indexOf(qq)>=0})}
+  h+=list.map(function(v){return"<div class='pc"+(st.v===v?" on":"")+"' data-v='"+v+"'>"+(v==="*"?"<div class='ph'>ALL</div>":"<img loading='lazy' src='"+imgOf(v)+"' alt=''>")+"<span>"+esc(nameOf(v))+"</span></div>"}).join("")+"</div>";
+  h+="<div class='selbar'>"+(st.v==="*"?"":"<img src='"+imgOf(st.v)+"' alt=''>")+"<div>Selected: <b>"+esc(nameOf(st.v))+"</b></div></div>";el.innerHTML=h;
+  var pq=el.querySelector(".pq");if(pq){pq.oninput=function(){st.q=pq.value;var p=pq.selectionStart;draw();var n=el.querySelector(".pq");n.focus();n.setSelectionRange(p,p)}}
+  el.querySelectorAll(".pkt button").forEach(function(b){b.onclick=function(){st.tab=b.dataset.t;draw()}});el.querySelectorAll(".pc").forEach(function(c){c.onclick=function(){st.v=c.dataset.v;draw()}})}
+ draw();return{get:function(){return st.v}}}
+var QPK;function fillSel(){QPK=mkPicker($("qg-pk"))}
+$("qg-go").onclick=function(){var u=$("qg-u").value.trim();if(!u)return toast("Enter a username",false);grant({username:u,item:QPK.get()},"Granted "+nameOf(QPK.get())+" to "+u)};
+function grant(o,msg){return post("/v1/admin/grant",o).then(function(d){if(d.ok){toast(d.pending?"Saved: applies when the player next opens YA CLIENT":"Done",true);addLog(msg+(d.pending?" (pending)":""));return d}toast("Error: "+(d.error||"failed"),false)}).catch(function(){toast("Network error",false)})}
+
+/* players */
+var cursor="";
+function loadPlayers(more){var q=$("q").value.trim();api("/v1/admin/players?q="+encodeURIComponent(q)+($("q-sp").checked?"&sp=1":"")+(more&&cursor?"&cursor="+encodeURIComponent(cursor):"")).then(function(d){cursor=d.cursor||"";var rows=(d.players||[]).map(function(n){return"<tr class='click' data-n='"+esc(n)+"'><td>"+esc(n)+"</td><td class='muted' style='text-align:right'>Open</td></tr>"}).join("");
+ if(!more)$("plist").innerHTML=rows?"<table><tr><th>Name (lowercase)</th><th></th></tr>"+rows+"</table>":"<div class='muted'>No player found. Players appear here after they open YA CLIENT or the launcher once.</div>";else{var t=$("plist").querySelector("table");if(t)t.insertAdjacentHTML("beforeend",rows)}
+ if(cursor){var m=$("more");if(m)m.remove();$("plist").insertAdjacentHTML("beforeend","<div style='margin-top:12px'><button class='btn' id='more'>Load more</button></div>");$("more").onclick=function(){loadPlayers(true)}}
+ $("plist").querySelectorAll("tr.click").forEach(function(r){r.onclick=function(){openPlayer(r.dataset.n)}})}).catch(function(){toast("Could not load players",false)})}
+$("q-go").onclick=function(){loadPlayers(false)};$("q-sp").onchange=function(){loadPlayers(false)};$("q").onkeydown=function(e){if(e.key==="Enter")loadPlayers(false)};
+function owns(p,b){return SLOTS.every(function(s){return p.owned.indexOf(pre(b)+"_"+s)>=0})}
+function openPlayer(name,uuid){api("/v1/admin/player?"+(uuid?"uuid="+encodeURIComponent(uuid):"name="+encodeURIComponent(name))).then(function(p){var box=$("pd");box.classList.remove("hide");if(!p.found){box.innerHTML="<h3>"+esc(name)+"</h3><div class='muted'>Unknown player.</div>";return}
+ var owned=BUNDLES.filter(function(b){return owns(p,b)}),loose=p.owned.filter(function(i){return!BUNDLES.some(function(b){return owns(p,b)&&i.indexOf(pre(b)+"_")===0})});
+ var plusTxt=p.plus?'<span class="chip gold">YA Plus</span> until '+esc(p.plus_until.slice(0,10)):'<span class="chip">No Plus</span>';
+ var eq=SLOTS.map(function(s){var v=p.equipped[s];return"<span class='chip'>"+s+": "+esc(v&&v!=="none"?v:"none")+"</span>"}).join("");
+ box.innerHTML="<h3><span>"+esc(p.name||name)+"</span><button class='btn sm' id='pd-x'>Close</button></h3>"+
+ "<div class='kv'><span>Status</span><span>"+(p.online?"<i class='dot'></i>Online"+(p.where?" ("+esc(p.where)+")":""):"<i class='dot off'></i>Offline")+"</span><span>UUID</span><span class='mono'>"+esc(p.uuid)+"</span><span>YA Plus</span><span>"+plusTxt+"</span><span>Staff logo</span><span>"+(p.staff?"<span class='chip ok'>Staff</span>":"<span class='chip'>No</span>")+"</span><span>Device lock</span><span>"+(p.linked?"<span class='chip'>Linked to a PC</span>":"<span class='chip'>Not linked</span>")+"</span><span>Friends</span><span>"+p.friends+"</span><span>Pending grants</span><span>"+esc(p.pending_grants)+"</span></div>"+
+ "<div class='kv'><span>Bundles</span><span>"+(owned.map(function(b){return"<span class='chip ok'>"+NAMES[b]+"</span>"}).join("")||"<span class='muted'>none</span>")+"</span><span>Single items</span><span>"+(loose.map(function(i){return"<span class='chip'>"+esc(i)+"</span>"}).join("")||"<span class='muted'>none</span>")+"</span><span>Equipped</span><span>"+eq+"</span></div>"+
+ "<div class='grid2' style='margin-top:14px;grid-template-columns:1.4fr 1fr'><div><div class='muted' style='margin-bottom:8px'>Cosmetics</div><div id='pd-pk'></div><div class='row' style='margin-top:10px'><button class='btn pri' id='pd-g'>Grant</button><button class='btn red' id='pd-r'>Revoke</button></div></div>"+
+ "<div><div class='muted' style='margin-bottom:8px'>YA Plus</div><div class='row'><input id='pd-d' style='width:110px' value='30' inputmode='numeric'><span class='muted'>days</span><button class='btn pri' id='pd-pa'>Add Plus</button><button class='btn red' id='pd-pr'>Remove Plus</button></div>"+
+ "<div class='muted' style='margin:16px 0 8px'>Staff logo (blue, visible to everyone)</div><div class='row'><button class='btn pri' id='pd-sa'>Make staff</button><button class='btn red' id='pd-sr'>Remove staff</button></div><div class='muted' style='margin:16px 0 8px'>Account</div><div class='row'><button class='btn' id='pd-u'>Unlink device</button></div></div></div>";
+ var PPK=mkPicker($("pd-pk")),again=function(){openPlayer(p.name||name,p.uuid)};
+ $("pd-x").onclick=function(){box.classList.add("hide")};
+ $("pd-g").onclick=function(){grant({uuid:p.uuid,item:PPK.get()},"Granted "+nameOf(PPK.get())+" to "+(p.name||name)).then(again)};
+ $("pd-r").onclick=function(){if(confirm("Revoke "+nameOf(PPK.get())+" from "+(p.name||name)+"?"))grant({uuid:p.uuid,item:PPK.get(),revoke:"1"},"Revoked "+nameOf(PPK.get())+" from "+(p.name||name)).then(again)};
+ $("pd-pa").onclick=function(){grant({uuid:p.uuid,item:"plus",days:$("pd-d").value||"30"},"Added "+($("pd-d").value||"30")+" days of Plus to "+(p.name||name)).then(again)};
+ $("pd-pr").onclick=function(){if(confirm("Remove YA Plus from "+(p.name||name)+"?"))grant({uuid:p.uuid,item:"plus",revoke:"1"},"Removed Plus from "+(p.name||name)).then(again)};
+ $("pd-sa").onclick=function(){grant({uuid:p.uuid,item:"staff"},"Made "+(p.name||name)+" staff").then(again)};
+ $("pd-sr").onclick=function(){if(confirm("Remove the staff logo from "+(p.name||name)+"?"))grant({uuid:p.uuid,item:"staff",revoke:"1"},"Removed staff from "+(p.name||name)).then(again)};
+ $("pd-u").onclick=function(){if(confirm("Unlink the device of "+(p.name||name)+"? They can log in from any PC once."))post("/v1/admin/unclaim",{uuid:p.uuid}).then(function(d){if(d.ok){toast("Device unlinked",true);addLog("Unlinked device of "+(p.name||name));again()}else toast("Error: "+(d.error||"failed"),false)})};
+ box.scrollIntoView({behavior:"smooth",block:"nearest"})}).catch(function(){toast("Could not load the player",false)})}
+
+/* online */
+function loadOnline(){$("onl").innerHTML="<div class='muted'>Loading...</div>";api("/v1/admin/online").then(function(d){var l=d.online||[];$("onl").innerHTML=l.length?"<table><tr><th>Player</th><th>Where</th></tr>"+l.map(function(o){return"<tr class='click' data-u='"+esc(o.uuid)+"' data-n='"+esc(o.name)+"'><td><i class='dot'></i>"+esc(o.name)+"</td><td class='muted'>"+esc(o.where)+"</td></tr>"}).join("")+"</table>":"<div class='muted'>Nobody online right now.</div>";
+ $("onl").querySelectorAll("tr.click").forEach(function(r){r.onclick=function(){document.querySelector(".nav[data-p=pl]").click();openPlayer(r.dataset.n,r.dataset.u)}})}).catch(function(){toast("Could not load",false)})}
+$("on-rf").onclick=loadOnline;
+
+/* system */
+$("st").onclick=function(){$("st-out").textContent="Testing...";fetch("/v1/selftest").then(function(r){return r.json()}).then(function(d){var ks=Object.keys(d).filter(function(k){return/^(hasJoined|sessionProfile|apiProfile|msProfile)_none$/.test(k)});$("st-out").innerHTML=ks.length?ks.map(function(k){var v=d[k],ok=/^(200|204)$/.test(v);return"<span class='chip "+(ok?"ok":"bad")+"'>"+k.replace("_none","")+": "+esc(v)+"</span>"}).join(""):esc(JSON.stringify(d))}).catch(function(){$("st-out").textContent="Test failed."})};
+</script></body></html>

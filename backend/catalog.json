@@ -1,0 +1,14 @@
+{
+  "store": "https://your-website.example/store",
+  "items": {
+    "angel":    { "slot": "wings",   "price": "4.99 EUR" },
+    "dragon":   { "slot": "wings",   "price": "5.99 EUR" },
+    "classic":  { "slot": "cape",    "price": "2.99 EUR" },
+    "crimson":  { "slot": "cape",    "price": "3.99 EUR" },
+    "midnight": { "slot": "cape",    "price": "3.99 EUR" },
+    "tophat":   { "slot": "hat",     "price": "2.99 EUR" },
+    "crown":    { "slot": "hat",     "price": "4.99 EUR" },
+    "red":      { "slot": "bandana", "price": "1.99 EUR" },
+    "black":    { "slot": "bandana", "price": "1.99 EUR" }
+  }
+}

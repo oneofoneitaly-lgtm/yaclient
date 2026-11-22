@@ -1,0 +1,128 @@
+plugins {
+    id 'fabric-loom' version '1.14-SNAPSHOT'
+}
+
+version = project.mod_version
+group = 'dev.yaclient'
+
+base { archivesName = 'yaclient-fabric' }
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.mc}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.api}"
+}
+
+// ---- one source of truth: the 26.2 client in ../fabric is rewritten for the selected Minecraft version ----
+def base = [
+        [/GuiGraphicsExtractor/, 'GuiGraphics'],
+        [/\bextractRenderState\(/, 'render('],
+        [/\bextractBackground\(/, 'renderBackground('],
+        [/net\.fabricmc\.fabric\.api\.client\.keymapping\.v1\.KeyMappingHelper/, 'net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper'],
+        [/KeyMappingHelper\.registerKeyMapping/, 'KeyBindingHelper.registerKeyBinding'],
+        [/LivingEntityRenderLayerRegistrationCallback/, 'LivingEntityFeatureRendererRegistrationCallback'],
+        [/net\.minecraft\.util\.LightCoordsUtil/, 'net.minecraft.client.renderer.LightTexture'],
+        [/\bLightCoordsUtil\b/, 'LightTexture'],
+        [/\bg\.outline\(/, 'g.renderOutline('],
+        [/\bg\.itemDecorations\(/, 'g.renderItemDecorations('],
+        [/\bg\.item\(/, 'g.renderItem('],
+        [/\bg\.text\(/, 'g.drawString('],
+]
+def r8 = [
+    [/import net\.minecraft\.network\.chat\.FontDescription;/, ''],
+    [/new FontDescription\.Resource\(/, '('],
+    [/KeyMapping\.Category\.register\(Identifier\.fromNamespaceAndPath\("yaclient", "main"\)\)/, '"key.categories.yaclient"'],
+    [/\bsetScreenAndShow\(/, 'setScreen('],
+    [/getProfile\(\)\.id\(\)/, 'getProfile().getId()'],
+    [/getProfile\(\)\.name\(\)/, 'getProfile().getName()'],
+    [/\bIdentifier\b/, 'ResourceLocation'],
+    [/getWindow\(\)\.handle\(\)/, 'getWindow().getWindow()'],
+    [/import net\.minecraft\.client\.input\.(MouseButtonEvent|KeyEvent|CharacterEvent);/, ''],
+    [/public boolean mouseClicked\(MouseButtonEvent e, boolean dbl\) \{/, 'public boolean mouseClicked(double mx_, double my_, int b_) { dev.yaclient.fabric.Ev e = new dev.yaclient.fabric.Ev(mx_, my_, b_, 0, 0, 0, 0); boolean dbl = false;'],
+    [/super\.mouseClicked\(e, dbl\)/, 'super.mouseClicked(mx_, my_, b_)'],
+    [/public boolean mouseDragged\(MouseButtonEvent e, double dx, double dy\) \{/, 'public boolean mouseDragged(double mx_, double my_, int b_, double dx, double dy) { dev.yaclient.fabric.Ev e = new dev.yaclient.fabric.Ev(mx_, my_, b_, 0, 0, 0, 0);'],
+    [/super\.mouseDragged\(e, dx, dy\)/, 'super.mouseDragged(mx_, my_, b_, dx, dy)'],
+    [/public boolean mouseReleased\(MouseButtonEvent e\) \{/, 'public boolean mouseReleased(double mx_, double my_, int b_) { dev.yaclient.fabric.Ev e = new dev.yaclient.fabric.Ev(mx_, my_, b_, 0, 0, 0, 0);'],
+    [/super\.mouseReleased\(e\)/, 'super.mouseReleased(mx_, my_, b_)'],
+    [/public boolean charTyped\(CharacterEvent e\) \{/, 'public boolean charTyped(char c_, int m_) { dev.yaclient.fabric.Ev e = new dev.yaclient.fabric.Ev(0, 0, 0, 0, 0, m_, c_);'],
+    [/super\.charTyped\(e\)/, 'super.charTyped(c_, m_)'],
+    [/public boolean keyPressed\(KeyEvent e\) \{/, 'public boolean keyPressed(int k_, int s_, int m_) { dev.yaclient.fabric.Ev e = new dev.yaclient.fabric.Ev(0, 0, 0, k_, s_, m_, 0);'],
+    [/super\.keyPressed\(e\)/, 'super.keyPressed(k_, s_, m_)'],
+    [/net\.minecraft\.client\.model\.player\.PlayerModel/, 'net.minecraft.client.model.PlayerModel'],
+    [/net\.minecraft\.client\.renderer\.SubmitNodeCollector/, 'net.minecraft.client.renderer.MultiBufferSource'],
+    [/\bSubmitNodeCollector\b/, 'MultiBufferSource'],
+    [/import net\.minecraft\.world\.entity\.Avatar;/, 'import net.minecraft.client.player.AbstractClientPlayer;'],
+    [/net\/minecraft\/world\/entity\/Avatar;/, 'net/minecraft/client/player/AbstractClientPlayer;'],
+    [/\bAvatarRenderState\b/, 'PlayerRenderState'],
+    [/\bAvatarRenderer\b/, 'PlayerRenderer'],
+    [/\bAvatar\b/, 'AbstractClientPlayer'],
+    [/"submit\(L/, '"render(L'],
+    [/public void submit\(PoseStack/, 'public void render(PoseStack'],
+]
+def r4 = [
+    [/g\.enableScissor\(/, 'dev.yaclient.fabric.Blit.scissor(g, '],
+    [/g\.pose\(\)\.pushMatrix\(\)/, 'g.pose().pushPose()'],
+    [/g\.pose\(\)\.popMatrix\(\)/, 'g.pose().popPose()'],
+    [/g\.pose\(\)\.translate\((.*)\);/, 'g.pose().translate($1, 0f);'],
+    [/g\.pose\(\)\.scale\((.*)\);/, 'g.pose().scale($1, 1f);'],
+    [/mc\.getWindow\(\)\.getGuiScale\(\)/, '((int) mc.getWindow().getGuiScale())'],
+    [/net\.minecraft\.client\.renderer\.RenderPipelines;/, 'net.minecraft.client.renderer.RenderType;'],
+    [/RenderPipelines\.GUI_TEXTURED/, 'RenderType::guiTextured'],
+    [/DynamicTexture\(\(\) -> label, ni\)/, 'DynamicTexture(ni)'],
+]
+def r1 = [
+    [/net\.minecraft\.server\.level\.ParticleStatus/, 'net.minecraft.client.ParticleStatus'],
+    [/ni\.setPixel\(x, y, img\.getRGB\(x, y\)\)/, 'ni.setPixelRGBA(x, y, dev.yaclient.fabric.Blit.abgr(img.getRGB(x, y)))'],
+    [/getYRot\(1f\)/, 'getYRot()'],
+    [/g\.blit\(RenderPipelines\.GUI_TEXTURED, (.*)\);/, 'dev.yaclient.fabric.Blit.blit(g, $1);'],
+]
+def rules = [
+    '1.21.11': base,
+    '1.21.8': base + r8,
+    '1.21.4': base + r8 + r4,
+    '1.21.1': base + r8 + r1 + r4,
+]
+def portedDir = layout.buildDirectory.dir("ported/java")
+tasks.register('portSources', Copy) {
+    from('../fabric/src/main/java')
+    into(portedDir)
+    def rs = rules[project.mc] ?: []
+    filter { String line -> rs.each { r -> line = line.replaceAll(r[0], r[1]) }; return line }
+    doLast {
+        copy { from("common"); into(portedDir) }
+        copy { from("overlay/${project.mc}"); into(portedDir) }   // hand-written replacements for one version
+    }
+}
+sourceSets.main.java.srcDir(portedDir)
+tasks.named('compileJava') { dependsOn 'portSources' }
+processResources {
+    from('../fabric/src/main/resources') {
+        exclude 'fabric.mod.json'
+        if (file("res/${project.mc}/yaclient.mixins.json").exists()) exclude 'yaclient.mixins.json'
+    }
+    from("res/${project.mc}")
+    inputs.property "version", project.version
+    inputs.property "mc", project.mc
+    filesMatching("fabric.mod.json") {
+        expand "version": inputs.properties.version, "mc": inputs.properties.mc
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+    options.encoding = 'UTF-8'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+    archiveClassifier = 'dev'
+}
+
+remapJar {
+    archiveFileName = "yaclient-fabric-${project.mc}.jar"
+}

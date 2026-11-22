@@ -1,0 +1,5 @@
+0 left.wav
+1 right.wav
+2 middle.wav
+3 side.wav
+4 side.wav

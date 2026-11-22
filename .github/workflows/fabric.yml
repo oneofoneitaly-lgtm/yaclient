@@ -1,0 +1,63 @@
+name: Build YA CLIENT (Fabric)
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fabric-jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: "current"
+      - name: Build the Fabric jar (with retries)
+        working-directory: fabric
+        run: |
+          for i in 1 2 3; do
+            gradle build --no-daemon && exit 0
+            echo "Build failed (try $i), retrying in 45s..."
+            sleep 45
+          done
+          exit 1
+      - name: API dump (printed in the log)
+        if: always()
+        working-directory: fabric
+        run: |
+          JARS=$( (find ~/.gradle -name "*.jar" | grep -i "minecraft" | grep -vi "sources" | head -20; find ~/.gradle/caches/modules-2 -name "fabric-*.jar" | grep -vi "sources" | head -80) )
+          echo "== jars =="; echo "$JARS"
+          CP=$(echo "$JARS" | tr '\n' ':')
+          echo "== class search =="
+          for j in $JARS; do
+            unzip -l "$j" 2>/dev/null | awk '{print $4}' | grep "\.class$" | sed 's#/#.#g; s#\.class$##' > /tmp/classes_$(basename $j).txt || true
+          done
+          cat /tmp/classes_*.txt > /tmp/all_classes.txt 2>/dev/null || true
+          wc -l /tmp/all_classes.txt
+          while read -r pat; do
+            [ -z "$pat" ] && continue
+            echo "--- $pat"; grep -E "$pat" /tmp/all_classes.txt | head -40
+          done < tools/class-patterns.txt
+          echo "== javap =="
+          while read -r c; do
+            [ -z "$c" ] && continue
+            echo "##### $c"; javap -public -cp "$CP" "$c" 2>&1 | head -400
+          done < tools/api-classes.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: YAClient-fabric-jar
+          path: fabric/build/libs/yaclient-fabric-*.jar
+          if-no-files-found: error
+      - name: Attach to the release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: fabric/build/libs/yaclient-fabric-26.2.jar

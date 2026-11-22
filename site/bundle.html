@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bundle - YA CLIENT</title><meta name="description" content="YA CLIENT cosmetics store: real 3D wings, capes, bandanas and pets. Try them on before you buy."><meta property="og:title" content="Bundle - YA CLIENT"><meta property="og:description" content="YA CLIENT cosmetics store: real 3D wings, capes, bandanas and pets. Try them on before you buy."><meta property="og:image" content="/news-update.png"><link rel="icon" href="/logo.png"><link rel="stylesheet" href="/ya.css?v=40"><link rel="stylesheet" href="/bundle.css?v=15"></head><body class=""><nav class="top"><div class="wrap"><a class="brand" href="/" aria-label="YA CLIENT"><img src="/logo.png" alt="YA CLIENT"></a><div class="nl"><a href="/" class=" ">Home</a><a href="/changelogs" class=" ">Changelogs</a><a href="/store" class="on ">Store</a><a href="/plus" class=" plusl">YA Plus</a><a href="#" data-dc>Discord</a><a class="cta keep" href="#" data-dl>Download</a></div></div></nav>
+
+<section class="hero" id="hero"><div class="hs" id="hs">
+<a class="hback" href="/store?c=bundle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Store</a><div class="hr">COSMETICS</div>
+<div class="ht" id="nm"></div><div class="hw">Worn by <b>zSoyNick_</b></div>
+<ul class="hi" id="hi"></ul>
+<div class="hb"><div class="bd-pr" id="pr"></div><div class="bd-btns"><button class="btn" id="addb">Add bundle to cart</button><button class="btn pri" id="buyb">Buy now</button></div></div>
+<div class="hf">AVAILABLE IN THE YA CLIENT STORE</div>
+<img class="r r0" id="r0" alt=""><img class="r r1" id="r1" alt=""><img class="r r2" id="r2" alt="">
+</div></section>
+<div class="wrap">
+<div class="plusbar" id="plusbar2" style="margin-top:34px"></div><h2 class="bd-h">What's inside</h2><div class="bd-items" id="its"></div>
+<h2 class="bd-h">3D view</h2><div class="bd-3d" id="stage3"><canvas id="v3d"></canvas><span class="cap">Drag to rotate</span></div>
+<h2 class="bd-h">More bundles</h2><div class="bd-og" id="og"></div><div style="height:110px"></div></div>
+<button class="cartfab" id="cartfab" aria-label="Cart">Cart <b id="cn">0</b></button>
+<div class="cartdr" id="cartdr"><div class="cd"><div class="ch"><b>Your cart</b><button id="cx" aria-label="Close">×</button></div><div id="cl"></div><div class="cf"><div class="ct"><span>Total</span><b id="ctot">-</b></div><button class="btn pri block" id="cbuy">Checkout</button><button class="btn block" id="cclr" style="margin-top:10px">Empty cart</button></div></div></div>
+<div class="lb" id="lb"><img alt=""></div>
+<footer><div class="wrap"><div>© YA CLIENT · Not affiliated with Mojang or Microsoft.</div><div class="fl"><a href="/changelogs">Changelogs</a><a href="/store">Store</a><a href="/plus">YA Plus</a><a href="#" data-dc>Discord</a></div></div></footer><script src="/config.js"></script><script src="/cosdata.js?v=21"></script><script src="/soon.js"></script><script src="/site.js?v=21"></script><script src="/plusbar.js?v=1"></script><script src="/geo.js?v=21"></script><script src="/cos3d.js?v=21"></script><script>
+(function(){
+var Y=window.YA,PR=Y.prices||{item:3},eur=window.YAeur,R=function(x){return Math.round(x*100)/100},K=function(){return window.YAplusOn?.5:1};
+var B=window.YA_B;
+
+var key=(new URLSearchParams(location.search).get('b')||location.hash.slice(1)||'').toLowerCase();
+if((window.YA.hidden||[]).some(function(h){return key===h||key.indexOf(h+'_')===0}))location.replace('/store');
+if(!B[key]){location.replace('/store?c=bundle');return}
+var b=B[key],ids=b.it.map(function(x){return x[0]});
+function setPrice(k){return k==='beta'?0:k==='qlux'?(PR.qluxBundle||8.99):k==='mono'?(PR.monoBundle||10.99):(PR.animeBundle||10.99)}
+function itemPrice(k){return k==='beta'?0:PR.item}
+var ITEM={},SETOF={};Object.keys(B).forEach(function(k){B[k].it.forEach(function(x){ITEM[x[0]]={n:x[1],s:k};SETOF[x[0]]=k})});
+document.title=b.n+' - YA CLIENT';document.getElementById('nm').textContent=b.n.toUpperCase();document.getElementById('hi').innerHTML=b.it.map(function(x){return '<li><i style="background:'+b.c+'"></i>'+x[1]+'</li>'}).join('');[0,1,2].forEach(function(n){document.getElementById('r'+n).src='/b/'+key+'-'+(n+1)+'.jpg'});function fit(){var h=document.getElementById('hero'),nv=document.querySelector('nav.top'),w=h.clientWidth,H=innerHeight-(nv?nv.offsetHeight:68),k=w/1920;h.style.height=Math.max(H,780*k)+'px';document.getElementById('hs').style.transform='scale('+k+')';var nm=document.getElementById('nm'),fs=92;nm.style.fontSize=fs+'px';while(nm.scrollWidth>840&&fs>40){fs-=4;nm.style.fontSize=fs+'px'}}fit();addEventListener('resize',fit);
+
+/* cart */
+var cart=[];try{cart=JSON.parse(localStorage.getItem('ya_cart')||'[]').filter(function(i){return ITEM[i]})}catch(e){}
+function save(){try{localStorage.setItem('ya_cart',JSON.stringify(cart))}catch(e){}}
+function cartTotal(list){var t=0;Object.keys(B).forEach(function(k){var m=list.filter(function(i){return SETOF[i]===k}).length;t+=m===4?setPrice(k):m*itemPrice(k)});return R(t*K())}
+function orderFor(list,title){var f=K(),t=cartTotal(list),full=Object.keys(B).some(function(k){return list.filter(function(i){return SETOF[i]===k}).length===4});
+ return {title:title||(list.length===1?ITEM[list[0]].n:'Custom cosmetics'),lines:list.map(function(i){return ITEM[i].n}).concat(full?['Bundle discount applied']:[],window.YAplusOn?['YA Plus -50% applied ('+window.YAplusName+')']:[]),total:t,ids:list.join(',')}}
+function add(list){list.forEach(function(i){if(cart.indexOf(i)<0)cart.push(i)});save();drawCart()}
+function drawCart(){var n=cart.length;document.getElementById('cn').textContent=n;document.getElementById('cartfab').className='cartfab'+(n?' on':'');
+ document.getElementById('cl').innerHTML=n?cart.map(function(i){return '<div class="cr"><span>'+ITEM[i].n+'<em>'+B[ITEM[i].s].n+'</em></span><button data-rm="'+i+'" aria-label="Remove">×</button></div>'}).join(''):'<p class="ce">Your cart is empty.</p>';
+ document.getElementById('ctot').textContent=n?eur(cartTotal(cart)):'-';document.getElementById('cbuy').disabled=!n;
+ [].forEach.call(document.querySelectorAll('[data-add]'),function(x){var i=x.dataset.add;x.textContent=cart.indexOf(i)>=0?'In cart ✓':'Add to cart'});
+ var all=ids.every(function(i){return cart.indexOf(i)>=0});document.getElementById('addb').textContent=all?'Bundle in cart ✓':'Add bundle to cart'}
+function price(){var f=K(),tot=R(setPrice(key)*f);document.getElementById('pr').innerHTML=key==='beta'?'<b>Free</b><span>Beta testers</span>':(f<1?'<s>'+eur(setPrice(key))+'</s>':'')+'<b>'+eur(tot)+'</b><span>Save '+eur(R(PR.item*4*f-tot))+'</span>'}
+/* items */
+var thumbs={};
+function items(){var f=K();document.getElementById('its').innerHTML=b.it.map(function(x){return '<div class="bd-it" style="--c:'+b.c+'"><a class="im" href="/item?i='+x[0]+'"><img src="/b/i/'+x[0]+'.jpg" alt="'+x[1]+'" loading="lazy"></a><div class="bt"><b><a href="/item?i='+x[0]+'">'+x[1]+'</a></b><span>'+x[2]+'</span><div class="pp">'+(key==='beta'?'Free':eur(R(PR.item*f)))+'</div><div class="bb"><button class="btn sm" data-add="'+x[0]+'">Add to cart</button><button class="btn sm pri" data-now="'+x[0]+'">Buy now</button></div></div></div>'}).join('');drawCart()}
+var lb=document.getElementById('lb');lb.onclick=function(){lb.className='lb'};
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){lb.className='lb';document.getElementById('cartdr').className='cartdr'}});
+/* other bundles */
+document.getElementById('og').innerHTML=Object.keys(B).filter(function(k){return k!==key}).map(function(k){var o=B[k],ix={sakura:1,shinobi:1,kitsune:1,santa:1,frost:1,clown:1,luck:1,mono:1};return '<a class="ob" href="/bundle?b='+k+'" style="--c:'+o.c+'"><img src="/b/'+k+'-2.jpg" alt=""><b>'+o.n.replace(' Bundle','')+'</b><span>BUNDLE</span><em>'+(k==='beta'?'Free':eur(setPrice(k)))+'</em></a>'}).join('');
+document.addEventListener('click',function(e){var t=e.target.closest('[data-add],[data-now],[data-rm],#addb,#buyb,#cartfab,#cx,#cbuy,#cclr');if(!t)return;
+ if(t.dataset.add){var i=t.dataset.add;var j=cart.indexOf(i);if(j>=0)cart.splice(j,1);else cart.push(i);save();drawCart();return}
+ if(t.dataset.now){YABuy(orderFor([t.dataset.now]));return}
+ if(t.dataset.rm){cart=cart.filter(function(x){return x!==t.dataset.rm});save();drawCart();return}
+ if(t.id==='addb'){var all=ids.every(function(i){return cart.indexOf(i)>=0});if(all)cart=cart.filter(function(x){return ids.indexOf(x)<0});else add(ids);save();drawCart();return}
+ if(t.id==='buyb'){YABuy(orderFor(ids,b.n));return}
+ if(t.id==='cartfab'){document.getElementById('cartdr').className='cartdr show';return}
+ if(t.id==='cx'){document.getElementById('cartdr').className='cartdr';return}
+ if(t.id==='cclr'){cart=[];save();drawCart();return}
+ if(t.id==='cbuy'&&cart.length){document.getElementById('cartdr').className='cartdr';YABuy(orderFor(cart,'Cart'))}});
+document.getElementById('cartdr').addEventListener('click',function(e){if(e.target.id==='cartdr')e.target.className='cartdr'});
+document.addEventListener('yaplus',function(){price();items();drawCart()});
+price();items();
+/* 3D */
+if(window.YA3D&&YA3D.ok()){YA3D.whenReady(function(){var v=YA3D.viewer(document.getElementById('v3d'),{yaw:.55,dist:6.2,target:[0,.98,0]});v.set(ids,false);YA3D.skinBox(document.getElementById('stage3'),v)})}
+else document.getElementById('stage3').innerHTML='<div class="fall" style="padding:40px;text-align:center;color:var(--mute)">3D preview needs WebGL.</div>';
+})();
+</script></body></html>

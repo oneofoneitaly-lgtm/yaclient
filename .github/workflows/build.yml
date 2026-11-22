@@ -1,0 +1,90 @@
+name: Build YA CLIENT
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  client-jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: "9.1.0"
+      - name: Compila YAClient.jar
+        working-directory: client
+        run: |
+          for i in 1 2 3 4 5; do
+            gradle build --no-daemon --refresh-dependencies && exit 0
+            rm -rf ~/.gradle/caches/modules-2/metadata-* || true
+            echo "Build fallita (tentativo $i), probabile limite di rete di Maven. Riprovo tra 60s..."
+            sleep 90
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: YAClient-jar
+          path: client/build/libs/YAClient.jar
+
+  launcher-exe:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Imposta repository nel launcher
+        shell: bash
+        run: |
+          sed -i "s#TUO_UTENTE_GITHUB/ya-client#${{ github.repository }}#" launcher/config.json
+      - name: Versione launcher dal tag (così l'auto-update vede sempre una versione nuova)
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        working-directory: launcher
+        run: |
+          V="${GITHUB_REF_NAME#[vV]}"
+          npm pkg set version="$V"
+          echo "Launcher version: $V"
+      - name: Compila installer .exe (con nuovi tentativi se la rete di GitHub fallisce)
+        shell: bash
+        working-directory: launcher
+        run: |
+          for i in 1 2 3 4; do
+            npm install && npm run dist && exit 0
+            echo "Tentativo $i fallito, riprovo tra 30 secondi..."
+            sleep 30
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: YA-CLIENT-Setup
+          path: |
+            launcher/dist/YA-CLIENT-Setup.exe
+            launcher/dist/YA-CLIENT-Setup.exe.blockmap
+            launcher/dist/latest.yml
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [client-jar, launcher-exe]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            out/YAClient.jar
+            out/YA-CLIENT-Setup.exe
+            out/YA-CLIENT-Setup.exe.blockmap
+            out/latest.yml

@@ -1,0 +1,168 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Store - YA CLIENT</title><meta name="description" content="YA CLIENT cosmetics store: real 3D wings, capes, bandanas and pets. Try them on before you buy."><meta property="og:title" content="Store - YA CLIENT"><meta property="og:description" content="YA CLIENT cosmetics store: real 3D wings, capes, bandanas and pets. Try them on before you buy."><meta property="og:image" content="/news-update.png"><link rel="icon" href="/logo.png"><link rel="stylesheet" href="/ya.css?v=40"><link rel="stylesheet" href="/flat.css?v=3"></head><body class=""><nav class="top"><div class="wrap"><a class="brand" href="/" aria-label="YA CLIENT"><img src="/logo.png" alt="YA CLIENT"></a><div class="nl"><a href="/" class=" ">Home</a><a href="/changelogs" class=" ">Changelogs</a><a href="/store" class="on ">Store</a><a href="/plus" class=" plusl">YA Plus</a><a href="#" data-dc>Discord</a><a class="cta keep" href="#" data-dl>Download</a></div></div></nav>
+<div class="page-h"><div class="wrap"><h1 class="plain">Cosmetics</h1><p class="sub">Wings, capes, bandanas and pets. Click any item to see it on its own page.</p></div></div>
+<div class="wrap">
+<div class="plusbar" id="plusbar2"></div>
+<div class="store" style="display:block"><div><div class="chips" id="chips"></div><div class="pg" id="grid"></div></div>
+</div></div>
+<footer><div class="wrap"><div>© YA CLIENT · Not affiliated with Mojang or Microsoft.</div><div class="fl"><a href="/changelogs">Changelogs</a><a href="/store">Store</a><a href="/plus">YA Plus</a><a href="#" data-dc>Discord</a></div></div></footer><script src="/config.js"></script><script src="/soon.js"></script><script src="/site.js?v=21"></script><script src="/plusbar.js?v=1"></script><script>
+(function(){
+var Y=window.YA,PR=Y.prices||{item:3.49,monoBundle:10.99},eur=window.YAeur;
+var P={
+ ya_cape:{n:'YA Cape',cat:'cape',slot:'cape',d:'Black and red cape with the YA logo glitching on it.',set:'beta'},
+ ya_wings:{n:'Ember Wings',cat:'wings',slot:'wings',d:'Feathered wings, black fading to red.',set:'beta'},
+ ya_bandana:{n:'YA Bandana',cat:'bandana',slot:'bandana',d:'Red and black bandana with waving tails.',set:'beta'},
+ ya_pet:{n:'Ember (pet)',cat:'pet',slot:'pet',d:'A tiny fox-dragon with a flame tail that follows you.',set:'beta'},
+ mono_cape:{n:'Infinity Cape',cat:'cape',slot:'cape',d:'Pure black cape, a white infinity symbol draws itself on it.',set:'mono'},
+ mono_wings:{n:'Shadow Dragon Wings',cat:'wings',slot:'wings',d:'All-black dragon wings with white spikes.',set:'mono'},
+ mono_bandana:{n:'Monochrome Bandana',cat:'bandana',slot:'bandana',d:'Black bandana with a white stripe.',set:'mono'},
+ mono_pet:{n:'Yin Yang (pet)',cat:'pet',slot:'pet',d:'A spinning yin yang that floats next to you.',set:'mono'},
+ qlux_cape:{n:'Qlux Cape',cat:'cape',slot:'cape',d:'White satin cape with the black Qlux_ wordmark.',set:'qlux',partner:1},
+ qlux_wings:{n:'Qlux Angel Wings',cat:'wings',slot:'wings',d:'White feather wings with ice-blue tips.',set:'qlux',partner:1},
+ qlux_bandana:{n:'Qlux Band',cat:'bandana',slot:'bandana',d:'White band with an ice-blue glow and flowing tails.',set:'qlux',partner:1},
+ qlux_pet:{n:'Lumi (pet)',cat:'pet',slot:'pet',d:'A tiny light fox-cat with a halo, glowing eyes and little wings.',set:'qlux',partner:1},
+ sakura_cape:{n:'Sakura Cape',cat:'cape',slot:'cape',d:'Soft pink satin cape with a blossoming cherry branch.',set:'sakura'},
+ sakura_wings:{n:'Petal Wings',cat:'wings',slot:'wings',d:'Wings of layered cherry-blossom petals.',set:'sakura'},
+ sakura_bandana:{n:'Blossom Band',cat:'bandana',slot:'bandana',d:'Pink band with a ribbon of petals.',set:'sakura'},
+ sakura_pet:{n:'Mochi (pet)',cat:'pet',slot:'pet',d:'A pixel bunny with a blossom on its ear.',set:'sakura'},
+ shinobi_cape:{n:'Moonlit Cloak',cat:'cape',slot:'cape',d:'Night-blue cloak with a silver crescent moon.',set:'shinobi'},
+ shinobi_wings:{n:'Blade Wings',cat:'wings',slot:'wings',d:'Long violet blade feathers.',set:'shinobi'},
+ shinobi_bandana:{n:'Shinobi Headband',cat:'bandana',slot:'bandana',d:'A dark headband with a violet glow.',set:'shinobi'},
+ shinobi_pet:{n:'Kage (pet)',cat:'pet',slot:'pet',d:'A pixel ninja cat with a headband and scarf.',set:'shinobi'},
+ kitsune_cape:{n:'Kitsune Cape',cat:'cape',slot:'cape',d:'White cape with a red fox mask and a vermilion hem.',set:'kitsune'},
+ kitsune_wings:{n:'Flame Wings',cat:'wings',slot:'wings',d:'Wings of orange and gold flames.',set:'kitsune'},
+ kitsune_bandana:{n:'Shrine Ribbon',cat:'bandana',slot:'bandana',d:'A shrine ribbon in vermilion and gold.',set:'kitsune'},
+ kitsune_pet:{n:'Inari (pet)',cat:'pet',slot:'pet',d:'A pixel two-tailed fox with a golden bell.',set:'kitsune'},
+ santa_cape:{n:'Santa Cape',cat:'cape',slot:'cape',d:'Red pixel cape with white fur and a golden gift.',set:'santa'},
+ santa_wings:{n:'Candy Wings',cat:'wings',slot:'wings',d:'Pixel wings with red and white candy-cane stripes.',set:'santa'},
+ santa_bandana:{n:'Santa Band',cat:'bandana',slot:'bandana',d:'Red band with white fur and a pompom.',set:'santa'},
+ santa_pet:{n:'Rudy (pet)',cat:'pet',slot:'pet',d:'A pixel reindeer with a red nose and a Santa hat.',set:'santa'},
+ frost_cape:{n:'Snowflake Cape',cat:'cape',slot:'cape',d:'Icy pixel cape with a snowflake and icicle hem.',set:'frost'},
+ frost_wings:{n:'Ice Wings',cat:'wings',slot:'wings',d:'Pixel wings of ice with glinting crystals.',set:'frost'},
+ frost_bandana:{n:'Frost Band',cat:'bandana',slot:'bandana',d:'Icy band with a snowflake and scarf tails.',set:'frost'},
+ frost_pet:{n:'Frosty (pet)',cat:'pet',slot:'pet',d:'A pixel snowman with a top hat and a carrot nose.',set:'frost'},
+ clown_cape:{n:'Clown Cape',cat:'cape',slot:'cape',d:'Plain white pixel cape with a clown face.',set:'clown'},
+ clown_wings:{n:'Balloon Wings',cat:'wings',slot:'wings',d:'A pixel bouquet of colorful balloons on strings.',set:'clown'},
+ clown_bandana:{n:'Clown Band',cat:'bandana',slot:'bandana',d:'Candy-striped band with pompoms and rainbow tails.',set:'clown'},
+ clown_pet:{n:'Bozo (pet)',cat:'pet',slot:'pet',d:'A pixel clown with a red nose that juggles three balls.',set:'clown'},
+ luck_cape:{n:'Clover Cape',cat:'cape',slot:'cape',d:'Plain white cape with a single animated four-leaf clover.',set:'luck'},
+ luck_wings:{n:'Clover Wings',cat:'wings',slot:'wings',d:'Smooth wings made of golden-rimmed clover leaves.',set:'luck'},
+ luck_bandana:{n:'Lucky Band',cat:'bandana',slot:'bandana',d:'Emerald band with a gold ribbon.',set:'luck'},
+ luck_pet:{n:'Lucky (pet)',cat:'pet',slot:'pet',d:'A little ladybug with a lucky gold antenna.',set:'luck'},
+ sky_cape:{n:'Sky Cape',cat:'cape',slot:'cape',d:'Blue sky with a pastel rainbow, a smiling cloud and a sun.',set:'x'},
+ ocean_cape:{n:'Ocean Cape',cat:'cape',slot:'cape',d:'Sunlit water with a little fish, bubbles and seaweed.',set:'x'},
+ sunset_cape:{n:'Sunset Cape',cat:'cape',slot:'cape',d:'A striped sun setting over the sea, with a palm tree.',set:'x'},
+ forest_cape:{n:'Forest Cape',cat:'cape',slot:'cape',d:'Night forest with pines, a moon, a mushroom and fireflies.',set:'x'},
+ space_cape:{n:'Space Cape',cat:'cape',slot:'cape',d:'A ringed planet, a small moon and a shooting star.',set:'x'},
+ dragon_wings:{n:'Dragon Wings',cat:'wings',slot:'wings',d:'Leathery bat wings with bones and a scalloped edge.',set:'x'},
+ butterfly_wings:{n:'Butterfly Wings',cat:'wings',slot:'wings',d:'Orange pixel wings with eyespots and white dots.',set:'x'},
+ azure_wings:{n:'Azure Wings',cat:'wings',slot:'wings',d:'Chunky Bedrock-style fan of white-to-blue feathers.',set:'x'},
+ venom_wings:{n:'Valkyrie Wings',cat:'wings',slot:'wings',d:'Four long stepped feathers in gold, green and violet.',set:'x'},
+ dragonfly_wings:{n:'Dragonfly Wings',cat:'wings',slot:'wings',d:'Slim translucent wings with veins.',set:'x'},
+ ninja_bandana:{n:'Ninja Headband',cat:'bandana',slot:'bandana',d:'Black headband with a steel plate and long tails.',set:'x'},
+ crown_bandana:{n:'Golden Crown',cat:'bandana',slot:'bandana',d:'A pixel gold crown with rubies and sapphires.',set:'x'},
+ halo_bandana:{n:'Angel Halo',cat:'bandana',slot:'bandana',d:'White band with a floating golden halo and tiny wings.',set:'x'},
+ cat_bandana:{n:'Cat Ears',cat:'bandana',slot:'bandana',d:'Pink headband with cat ears and a bell.',set:'x'},
+ rainbow_bandana:{n:'Rainbow Band',cat:'bandana',slot:'bandana',d:'Six-stripe rainbow band with flowing tails.',set:'x'},
+ drake_pet:{n:'Drake (pet)',cat:'pet',slot:'pet',d:'A baby pixel dragon with little wings.',set:'x'},
+ bunny_pet:{n:'Bunny (pet)',cat:'pet',slot:'pet',d:'A fluffy pixel bunny with long ears and a pink nose.',set:'x'},
+ penguin_pet:{n:'Penguin (pet)',cat:'pet',slot:'pet',d:'A pixel penguin with a blue scarf that waddles.',set:'x'},
+ panda_pet:{n:'Panda (pet)',cat:'pet',slot:'pet',d:'A pixel panda munching bamboo.',set:'x'},
+ axolotl_pet:{n:'Axolotl (pet)',cat:'pet',slot:'pet',d:'A pink pixel axolotl with fluffy gills.',set:'x'},
+ vampire_wings:{n:'Vampire Wings (Black)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in black: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_crimson_wings:{n:'Vampire Wings (Crimson)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in crimson: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_scarlet_wings:{n:'Vampire Wings (Scarlet)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in scarlet: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_orange_wings:{n:'Vampire Wings (Orange)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in orange: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_amber_wings:{n:'Vampire Wings (Amber)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in amber: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_gold_wings:{n:'Vampire Wings (Gold)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in gold: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_lime_wings:{n:'Vampire Wings (Lime)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in lime: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_green_wings:{n:'Vampire Wings (Green)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in green: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_emerald_wings:{n:'Vampire Wings (Emerald)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in emerald: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_teal_wings:{n:'Vampire Wings (Teal)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in teal: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_cyan_wings:{n:'Vampire Wings (Cyan)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in cyan: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_sky_wings:{n:'Vampire Wings (Sky)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in sky: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_blue_wings:{n:'Vampire Wings (Blue)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in blue: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_indigo_wings:{n:'Vampire Wings (Indigo)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in indigo: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_violet_wings:{n:'Vampire Wings (Violet)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in violet: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_purple_wings:{n:'Vampire Wings (Purple)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in purple: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_magenta_wings:{n:'Vampire Wings (Magenta)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in magenta: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_pink_wings:{n:'Vampire Wings (Pink)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in pink: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_rose_wings:{n:'Vampire Wings (Rose)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in rose: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_white_wings:{n:'Vampire Wings (White)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in white: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vamp_silver_wings:{n:'Vampire Wings (Silver)',cat:'wings',slot:'wings',d:'Smooth 3D dragon wings in silver: dark bones, one flat membrane colour, a soft swing as you move.',set:'x'},
+ vampire_cape:{n:'Geometric Bat Cape',cat:'cape',slot:'cape',d:'Flat black cape with a bat drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_crimson_cape:{n:'Geometric Heart Cape',cat:'cape',slot:'cape',d:'Flat crimson cape with a heart drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_scarlet_cape:{n:'Geometric Flame Cape',cat:'cape',slot:'cape',d:'Flat scarlet cape with a flame drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_orange_cape:{n:'Geometric Sun Cape',cat:'cape',slot:'cape',d:'Flat orange cape with a sun drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_amber_cape:{n:'Geometric Bolt Cape',cat:'cape',slot:'cape',d:'Flat amber cape with a bolt drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_gold_cape:{n:'Geometric Crown Cape',cat:'cape',slot:'cape',d:'Flat gold cape with a crown drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_lime_cape:{n:'Geometric Clover Cape',cat:'cape',slot:'cape',d:'Flat lime cape with a clover drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_green_cape:{n:'Geometric Pine Cape',cat:'cape',slot:'cape',d:'Flat green cape with a pine drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_emerald_cape:{n:'Geometric Gem Cape',cat:'cape',slot:'cape',d:'Flat emerald cape with a gem drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_teal_cape:{n:'Geometric Waves Cape',cat:'cape',slot:'cape',d:'Flat teal cape with a waves drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_cyan_cape:{n:'Geometric Snowflake Cape',cat:'cape',slot:'cape',d:'Flat cyan cape with a snowflake drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_sky_cape:{n:'Geometric Cloud Cape',cat:'cape',slot:'cape',d:'Flat sky cape with a cloud drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_blue_cape:{n:'Geometric Compass Cape',cat:'cape',slot:'cape',d:'Flat blue cape with a compass drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_indigo_cape:{n:'Geometric Moon Cape',cat:'cape',slot:'cape',d:'Flat indigo cape with a moon drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_violet_cape:{n:'Geometric Eye Cape',cat:'cape',slot:'cape',d:'Flat violet cape with a eye drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_purple_cape:{n:'Geometric Hexagram Cape',cat:'cape',slot:'cape',d:'Flat purple cape with a hexagram drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_magenta_cape:{n:'Geometric Butterfly Cape',cat:'cape',slot:'cape',d:'Flat magenta cape with a butterfly drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_pink_cape:{n:'Geometric Flower Cape',cat:'cape',slot:'cape',d:'Flat pink cape with a flower drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_rose_cape:{n:'Geometric Paw Cape',cat:'cape',slot:'cape',d:'Flat rose cape with a paw drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_white_cape:{n:'Geometric Angel Cape',cat:'cape',slot:'cape',d:'Flat white cape with a angel drawing that draws itself, holds and fades away.',set:'x'},
+ vamp_silver_cape:{n:'Geometric Sword Cape',cat:'cape',slot:'cape',d:'Flat silver cape with a sword drawing that draws itself, holds and fades away.',set:'x'},
+ storm_cape:{n:'Storm Cape',cat:'cape',slot:'cape',d:'Night clouds with a lightning bolt that strikes, flashes and fades.',set:'x'},
+ puppy_pet:{n:'Puppy (pet)',cat:'pet',slot:'pet',d:'A golden pixel puppy with floppy ears and a wagging tail.',set:'x'}};
+var SETS={beta:{n:'Beta Tester Bundle',d:'Cape, wings, bandana and pet. Free for beta testers.',items:['ya_cape','ya_wings','ya_bandana','ya_pet'],free:true},
+          mono:{n:'Monochrome Bundle',d:'Infinity cape, shadow dragon wings, bandana and yin yang pet.',items:['mono_cape','mono_wings','mono_bandana','mono_pet'],price:PR.monoBundle},
+          qlux:{n:'Qlux Bundle',d:'Partner bundle made with the streamer Qlux: satin cape with the Qlux_ wordmark, angel wings, band and the Lumi spirit pet.',items:['qlux_cape','qlux_wings','qlux_bandana','qlux_pet'],price:PR.qluxBundle||8.99,partner:1},
+          sakura:{n:'Sakura Bundle',d:'Cherry-blossom pink: petal wings, blossom cape, ribbon band and the bunny Mochi.',items:['sakura_cape', 'sakura_wings', 'sakura_bandana', 'sakura_pet'],price:PR.animeBundle||10.99},
+          shinobi:{n:'Shinobi Bundle',d:'Night ninja: blade wings, moonlit cloak, headband and the ninja cat Kage.',items:['shinobi_cape', 'shinobi_wings', 'shinobi_bandana', 'shinobi_pet'],price:PR.animeBundle||10.99},
+          kitsune:{n:'Kitsune Bundle',d:'Shrine fox: flame wings, fox mask cape, shrine ribbon and the two-tailed fox Inari.',items:['kitsune_cape', 'kitsune_wings', 'kitsune_bandana', 'kitsune_pet'],price:PR.animeBundle||10.99},
+          santa:{n:'Santa Bundle',d:'Christmas pixel bundle: candy wings, gift cape, Santa band and the reindeer Rudy.',items:['santa_cape', 'santa_wings', 'santa_bandana', 'santa_pet'],price:PR.animeBundle||10.99},
+          frost:{n:'Frost Bundle',d:'Christmas pixel bundle: ice wings, snowflake cape, frost band and the snowman Frosty.',items:['frost_cape', 'frost_wings', 'frost_bandana', 'frost_pet'],price:PR.animeBundle||10.99},
+          clown:{n:'Clown Bundle',d:'Pixel circus bundle: balloon wings, harlequin cape, striped pompom band and Bozo the juggling clown.',items:['clown_cape', 'clown_wings', 'clown_bandana', 'clown_pet'],price:PR.animeBundle||10.99},
+          luck:{n:'Luck Bundle',d:'Lucky green bundle: clover-leaf wings, a white cape with one animated four-leaf clover, a lucky band and the ladybug Lucky.',items:['luck_cape', 'luck_wings', 'luck_bandana', 'luck_pet'],price:PR.animeBundle||10.99}};
+var CATS=[['cape','Cloaks'],['wings','Wings'],['bandana','Bandanas'],['pet','Pets'],['bundle','Bundles'],['partner','Partner']];
+var COL={sakura:'#ff86b6',shinobi:'#8c6cff',kitsune:'#ff9b3d',santa:'#ff4040',frost:'#6ec6ff',clown:'#ffd21f',luck:'#3ddc6a',x:'#c9cdd8',mono:'#e4e4e8',beta:'#e10600',qlux:'#9fd8ff'};function ph(id){return COL[P[id].set]?'/b/i/'+id+'.jpg':''}
+var PAGES=['sakura','shinobi','kitsune','santa','frost','clown','luck','mono','beta','qlux'],cat=(new URLSearchParams(location.search).get('c')==='bundle'?'bundle':'cape'),worn=[],thumbs={},has3d=window.YA3D&&YA3D.ok(),view=null;
+var K=function(){return window.YAplusOn?0.5:1},R=function(x){return Math.round(x*100)/100};
+var priceOf=function(id){return P[id].set==='beta'?0:R(PR.item*K())};
+function total(list){var t=0;['mono','qlux','sakura','shinobi','kitsune','santa','frost','clown','luck'].forEach(function(st){var m=list.filter(function(i){return P[i].set===st}).length;t+=m===4?SETS[st].price:m*PR.item});t+=list.filter(function(i){return P[i].set==='x'}).length*PR.item;return R(t*K())}
+function snapOpts(id){var c=P[id].cat;return c==='wings'?{yaw:.35,dist:5.2,target:[0,1.15,0]}:c==='cape'?{yaw:.5,dist:3.7,target:[0,.95,0]}:c==='bandana'?{yaw:.55,dist:2.3,target:[0,1.78,0]}:{yaw:.5,dist:2.4,target:[-.4,1.55,0]}}
+function card(key,isSet){
+ var d=isSet?SETS[key]:P[key],ids=isSet?d.items:[key],free=isSet?!!d.free:P[key].set==='beta',price=isSet?(d.free?0:R(d.price*K())):priceOf(key);
+ var on=isSet?ids.every(function(i){return worn.indexOf(i)>=0}):worn.indexOf(key)>=0;
+ var tag=isSet?(d.free?'Free':d.partner?'Partner':'Bundle'):(free?'Beta':(d.partner?'Partner':''));
+ var save=isSet&&!d.free?'<span class="tagb save">Save '+eur(R(4*PR.item-price))+'</span>':(tag?'<span class="tagb">'+tag+'</span>':'');
+ var pr=free?'<span class="price free">Free</span>':(isSet?'<span class="price"><s>'+eur(4*PR.item)+'</s>'+eur(price)+'</span>':(window.YAplusOn?'<span class="price"><s>'+eur(PR.item)+'</s>'+eur(price)+'</span>':'<span class="price">'+eur(price)+'</span>'));
+ var im=thumbs[(isSet?'s:':'i:')+key];
+ var pp=isSet?(PAGES.indexOf(key)>=0?'/b/'+key+'-2.jpg':''):ph(key);return '<div class="pc '+(on?'on':'')+'" data-k="'+key+'" data-s="'+(isSet?1:0)+'">'+save+(pp?'<div class="im ph" style="--c:'+COL[isSet?key:P[key].set]+'"><img src="'+pp+'" alt="" loading="lazy"></div>':'<div class="im">'+(im?'<img src="'+im+'" alt="">':'<i>'+(has3d?'Rendering...':'')+'</i>')+'</div>')+'<div class="bd"><h3>'+d.n+'</h3><p>'+d.d+'</p><div class="pr">'+pr+'<button class="btn sm '+(free?'':'pri')+'" data-buy="'+key+'" data-s="'+(isSet?1:0)+'">'+(free?'Get free':'Buy')+'</button></div></div></div>'}
+function render(){
+ document.getElementById('chips').innerHTML=CATS.map(function(c){return '<button class="fchip '+(c[0]===cat?'on':'')+'" data-c="'+c[0]+'">'+c[1]+'</button>'}).join('');
+ var h='';
+ var HID=(Y.hidden||[]);
+ if(cat==='partner'&&HID.indexOf('qlux')<0){h+=card('qlux',true)}
+ if(cat==='bundle'){h+=card('mono',true)+(HID.indexOf('qlux')<0?card('qlux',true):'')+card('sakura',true)+card('shinobi',true)+card('kitsune',true)+card('santa',true)+card('frost',true)+card('clown',true)+card('luck',true)+card('beta',true)}
+ if(cat!=='bundle'&&cat!=='partner')Object.keys(P).forEach(function(id){if(P[id].cat===cat&&HID.indexOf(P[id].set)<0)h+=card(id,false)});
+ if(cat==='partner')Object.keys(P).forEach(function(id){if(P[id].partner&&HID.indexOf(P[id].set)<0)h+=card(id,false)});
+ if(cat==='partner'&&!h)h='<p style="color:#8b8b95">No partner bundles at the moment. Check back soon.</p>';
+ document.getElementById('grid').innerHTML=h;
+ }
+function toggle(id){var s=P[id].slot,i=worn.indexOf(id);if(i>=0){worn.splice(i,1)}else{worn=worn.filter(function(x){return P[x].slot!==s});worn.push(id)}}
+function orderFor(ids){
+ var t=total(ids),m=ids.length===4&&ids.every(function(i){return P[i].set!=='beta'&&P[i].set===P[ids[0]].set})?4:0,free=!t;
+ var title=ids.length===4&&ids.every(function(i){return P[i].set===P[ids[0]].set})?SETS[P[ids[0]].set].n:(ids.length===1?P[ids[0]].n:'Custom cosmetics');
+ return {title:title,lines:ids.map(function(i){return P[i].n+' · '+(priceOf(i)?eur(priceOf(i)):'Free')}).concat(m===4?['Bundle discount applied']:[],window.YAplusOn?['YA Plus -50% applied ('+window.YAplusName+')']:[]),total:t,ids:ids.join(',')}}
+document.addEventListener('yaplus',function(e){var b=document.getElementById('plusbar2');if(b){b.className='plusbar'+(e.detail&&e.detail.on?' on':'');b.querySelector('span').textContent=e.detail&&e.detail.on?'YA Plus active for '+e.detail.name+': -70% on everything, already applied below.':'Enter your Minecraft name under the 3D character to check your YA Plus discount.'}render()});
+document.addEventListener('click',function(e){
+ var t=e.target.closest('[data-buy],[data-c],[data-rm],.pc,#getw,#clr');if(!t)return;
+ if(t.dataset.c){cat=t.dataset.c;render();return}
+ if(t.dataset.rm){worn=worn.filter(function(x){return x!==t.dataset.rm});render();return}
+ if(t.id==='clr'){worn=[];render();return}
+ if(t.id==='getw'){if(worn.length)YABuy(orderFor(worn));return}
+ if(t.dataset.buy){e.stopPropagation();var k=t.dataset.buy,ids=t.dataset.s==='1'?SETS[k].items:[k];YABuy(orderFor(ids));return}
+ if(t.classList.contains('pc')){var k2=t.dataset.k;if(t.dataset.s!=='1'){location.href='/item?i='+k2;return}if(t.dataset.s==='1'&&PAGES.indexOf(k2)>=0){location.href='/bundle?b='+k2;return}if(t.dataset.s==='1'){var its=SETS[k2].items,all=its.every(function(i){return worn.indexOf(i)>=0});worn=all?[]:its.slice()}else toggle(k2);render()}
+});
+render();
+})();
+</script></body></html>
