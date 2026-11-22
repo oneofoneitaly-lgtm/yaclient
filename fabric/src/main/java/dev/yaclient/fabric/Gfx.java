@@ -134,6 +134,44 @@ public final class Gfx {
         g.blit(RenderPipelines.GUI_TEXTURED, t.id, x, y, (float) u, (float) v, w, h, uw, vh, t.w, t.h, faded(color));
     }
 
+    /** Any registered or vanilla texture (e.g. the title panorama) into a w x h box. */
+    public static void tex(Identifier id, int x, int y, int w, int h, float u, float v, int uw, int vh, int tw, int th, int color) {
+        if (g == null) return;
+        g.blit(RenderPipelines.GUI_TEXTURED, id, x, y, u, v, w, h, uw, vh, tw, th, faded(color));
+    }
+
+    /** A picture made once from code (server favicon, world icon) and cached under key; false if it could not be made. */
+    public static boolean picture(String key, java.util.function.Supplier<BufferedImage> src, int x, int y, int w, int h) {
+        if (g == null || MISSING.contains(key)) return false;
+        Tex t = TEX.get(key);
+        if (t == null) {
+            BufferedImage img = null;
+            try { img = src.get(); } catch (Throwable ignored) { }
+            if (img == null) { MISSING.add(key); return false; }
+            t = upload(key, img);
+            if (t == null) { MISSING.add(key); return false; }
+        }
+        draw(t, x, y, w, h, 0xFFFFFFFF);
+        return true;
+    }
+
+    /** Soft round glow (radial fade) centred on cx, cy. */
+    public static void glow(float cx, float cy, float rx, float ry, int rgb, int alpha) {
+        Tex t = TEX.get("glow");
+        if (t == null) {
+            int s = 64;
+            BufferedImage img = new BufferedImage(s, s, BufferedImage.TYPE_INT_ARGB);
+            for (int y = 0; y < s; y++) for (int x = 0; x < s; x++) {
+                double dx = (x + 0.5) / s * 2 - 1, dy = (y + 0.5) / s * 2 - 1;
+                double d = Math.min(1.0, Math.sqrt(dx * dx + dy * dy));
+                int a = (int) Math.round(255 * Math.pow(1 - d, 2));
+                img.setRGB(x, y, (a << 24) | 0xFFFFFF);
+            }
+            t = upload("glow", img);
+        }
+        draw(t, Math.round(cx - rx), Math.round(cy - ry), Math.round(2 * rx), Math.round(2 * ry), (Math.max(0, Math.min(255, alpha)) << 24) | (rgb & 0xFFFFFF));
+    }
+
     private static int faded(int color) {
         int a = Math.round(((color >>> 24) & 255) * fade);
         return (Math.max(0, Math.min(255, a)) << 24) | (color & 0xFFFFFF);
