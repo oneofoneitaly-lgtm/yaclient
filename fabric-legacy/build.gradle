@@ -17,7 +17,9 @@ dependencies {
 // ---- one source of truth: the 26.2 client in ../fabric is rewritten for the selected Minecraft version ----
 def base = [
         [/GuiGraphicsExtractor/, 'GuiGraphics'],
-        [/\bextractRenderState\(/, 'render('],
+        // GUI only: 26.x renamed Screen.render -> extractRenderState. Skip mixin target strings ("extractRenderState(L...),
+        // because the entity renderer method keeps its name on 1.21.x and renaming it breaks AvatarRendererMixin.
+        [/(?<!")\bextractRenderState\(/, 'render('],
         [/\bextractBackground\(/, 'renderBackground('],
         [/net\.fabricmc\.fabric\.api\.client\.keymapping\.v1\.KeyMappingHelper/, 'net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper'],
         [/KeyMappingHelper\.registerKeyMapping/, 'KeyBindingHelper.registerKeyBinding'],
