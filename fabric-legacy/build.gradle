@@ -30,8 +30,14 @@ def base = [
         [/\bg\.itemDecorations\(/, 'g.renderItemDecorations('],
         [/\bg\.item\(/, 'g.renderItem('],
         [/\bg\.text\(/, 'g.drawString('],
+        [/new OptionsScreen\(this, mc\.options, false\)/, 'new OptionsScreen(this, mc.options)'],
 ]
 def r8 = [
+    // menus (title / server list / world list)
+    [/CreateWorldScreen\.openFresh\(mc, \(\) -> mc\.setScreenAndShow\(this\)\)/, 'CreateWorldScreen.openFresh(mc, this)'],
+    [/, EventLoopGroupHolder\.remote\(mc\.options\.useNativeTransport\(\)\)\)/, ')'],
+    [/import net\.minecraft\.server\.network\.EventLoopGroupHolder;/, ''],
+    [/\.createLookup\(mc\.getGameProfile\(\), false\)/, '.lookupInsecure(mc.getGameProfile())'],
     [/import net\.minecraft\.network\.chat\.FontDescription;/, ''],
     [/new FontDescription\.Resource\(/, '('],
     [/KeyMapping\.Category\.register\(Identifier\.fromNamespaceAndPath\("yaclient", "main"\)\)/, '"key.categories.yaclient"'],
