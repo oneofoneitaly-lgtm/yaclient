@@ -46,7 +46,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "adrianmaftean09-commits",
+        "owner": "oneofoneitaly-lgtm",
         "repo": "yaclient"
       }
     ]
