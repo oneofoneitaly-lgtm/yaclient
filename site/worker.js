@@ -220,11 +220,32 @@ export async function onRequest({ request, env }) {
 }
 
 
+
+// /download -> streams the launcher from the latest GitHub release through this site, so the browser never leaves the website.
+async function downloadExe() {
+  const repo = 'oneofoneitaly-lgtm/yaclient';
+  try {
+    const r = await fetch('https://github.com/' + repo + '/releases/download/latest/YA-CLIENT.exe', { redirect: 'follow', cf: { cacheTtl: 300, cacheEverything: true } });
+    if (r.ok && r.body) {
+      const h = new Headers({
+        'Content-Type': 'application/octet-stream',
+        'Content-Disposition': 'attachment; filename="YA Client.exe"',
+        'Cache-Control': 'public, max-age=300'
+      });
+      const len = r.headers.get('Content-Length');
+      if (len) h.set('Content-Length', len);
+      return new Response(r.body, { status: 200, headers: h });
+    }
+  } catch (e) {}
+  return Response.redirect('https://github.com/' + repo + '/releases/latest', 302);
+}
+
 // Worker entry (Workers + static assets): /v1/* is the API, everything else is the website.
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname.startsWith('/v1/')) return onRequest({ request, env });
+    if (url.pathname === '/download' || url.pathname === '/download/') return downloadExe();
     return env.ASSETS.fetch(request);
   }
 };

@@ -2,7 +2,7 @@
 const Y=window.YA||{};
 const PAGES=[["index.html","Home"],["features.html","Features"],["changelogs.html","Changelogs"],["servers.html","Servers"],["install.html","Download"],["faq.html","FAQ"],["store.html","Store"]];
 const here=(location.pathname.split("/").pop()||"index.html").replace(/\/$/,"")||"index.html";
-const EXE="https://github.com/"+Y.repo+"/releases/download/latest/YA-CLIENT.exe";
+const EXE="/download";
 
 /* ---- pixel icons (8x8 bitmaps) ---- */
 const IC={
