@@ -239,7 +239,7 @@ async function findExe(repo) {
 }
 
 async function downloadExe() {
-  const repo = 'oneofoneitaly-lgtm/yaclient';
+  const repo = 'oneofoneitaly-lgtm/skyfxmod'; // the repository where the launcher is built and released
   const a = await findExe(repo);
   if (a) {
     try {
