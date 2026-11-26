@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Features - YA CLIENT</title><meta name="description" content="Mods and features of YA CLIENT for Minecraft 1.8.9.">
+<link rel="icon" href="/px/favicon.png"><link rel="stylesheet" href="/px.css"></head><body>
+
+<section><div class="wrap">
+  <div class="stitle"><h1>Features</h1><p>A selection of the 112 modules. Press Right Shift in game to open the menu and search them all.</p></div>
+  <div class="tabs"><button class="btn on" data-f="all">All</button><button class="btn" data-f="pvp">PvP</button><button class="btn" data-f="hud">HUD</button><button class="btn" data-f="visual">Visual</button><button class="btn" data-f="utility">Utility</button></div>
+  <div class="g g2" id="mods"></div>
+</div></section>
+<script src="/px-config.js"></script><script src="/px.js"></script>
+<script>const M=[["Keystrokes", "pvp", "aim", "WASD, mouse and space with colours, size, corners and outline."], ["CPS", "pvp", "clock", "Clicks per second, on screen or on the mouse keys."], ["1.7 animations", "pvp", "sword", "Old-style blocking, bow and eating swing."], ["Hit colour", "pvp", "sword", "See hits clearly with a custom colour."], ["AutoGG", "pvp", "chat", "Sends gg when a match ends."], ["FPS counter", "hud", "bolt", "Your frame rate at a glance."], ["Scoreboard", "hud", "hud", "Move and resize it, or switch it off."], ["Editable HUD", "hud", "hud", "Drag every element to the spot you like."], ["Levelhead", "hud", "tag", "Levels above player heads."], ["Chat", "hud", "chat", "No background, resizable."], ["Custom crosshair", "visual", "aim", "Draw your own on a pixel grid."], ["Fullbright", "visual", "eye", "See in the dark."], ["Motion blur", "visual", "eye", "Smooth movement, adjustable."], ["No clouds", "visual", "eye", "A clearer sky and more FPS."], ["Block outline", "visual", "eye", "Change the colour of the selection box."], ["Nick Tag", "visual", "tag", "YA logo next to your name, only for YA players."], ["FPS Boost", "utility", "bolt", "Lighter rendering for smoother fights."], ["Waypoints & minimap", "utility", "pin", "Mark places and find your way."], ["Discord Rich Presence", "utility", "disc", "Show what you play on Discord."], ["Spotify", "utility", "disc", "See your current song in game."], ["Mod search", "utility", "star", "Find any module in the menu instantly."], ["YA MENU", "utility", "star", "Title, singleplayer, multiplayer and pause menus in the YA style."]];
+const el=document.getElementById("mods");
+function draw(f){el.innerHTML=M.filter(m=>f=="all"||m[1]==f).map(m=>`<div class="px mod reveal">${pxIcon(m[2])}<div><h3>${esc(m[0])}</h3><p>${esc(m[3])}</p></div></div>`).join("");reveal()}
+document.querySelectorAll(".tabs .btn").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs .btn").forEach(x=>x.classList.toggle("on",x==b));draw(b.dataset.f)});
+draw("all");</script>
+</body></html>

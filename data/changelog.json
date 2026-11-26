@@ -1,0 +1,21 @@
+[
+  {"version": "Launcher 2.0", "date": "2026-11-26", "title": "A brand new launcher", "tag": "LAUNCHER", "changes": [
+    {"t": "new", "text": "New launcher built without Electron: one small .exe that updates itself."},
+    {"t": "new", "text": "Sections: Play, Mods, Servers, Settings, Console and Logs."},
+    {"t": "new", "text": "First-run setup for your account, mods and memory."},
+    {"t": "new", "text": "News with pictures and official partner servers on the launch screen."}
+  ]},
+  {"version": "YA MODS 1.8.9", "date": "2026-11-26", "title": "Keystrokes, crosshair and Nick Tag", "tag": "MODS", "changes": [
+    {"t": "new", "text": "Keystrokes: colours, size, corners, outline, opacity, sprint and sneak keys."},
+    {"t": "new", "text": "Draw your own crosshair on a pixel grid. The default Minecraft one hides automatically."},
+    {"t": "new", "text": "Nick Tag and tab logo for players using YA CLIENT."},
+    {"t": "new", "text": "Search box in the mod menu."},
+    {"t": "fixed", "text": "1.7 animations: blocking, bow and eating swing."}
+  ]},
+  {"version": "YA MENU 1.8.9", "date": "2026-11-26", "title": "Menus in the YA style", "tag": "MENU", "changes": [
+    {"t": "new", "text": "Redesigned title screen, singleplayer, multiplayer, pause and options menus."},
+    {"t": "new", "text": "Server pictures in the multiplayer list."},
+    {"t": "new", "text": "Clean loading screen with only the logo and a progress bar."},
+    {"t": "fixed", "text": "Leaving a server now returns you to the multiplayer list, and Back goes to the home screen."}
+  ]}
+]

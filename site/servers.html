@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Servers - YA CLIENT</title><meta name="description" content="Official YA CLIENT partner servers.">
+<link rel="icon" href="/px/favicon.png"><link rel="stylesheet" href="/px.css"></head><body>
+
+<section><div class="wrap">
+  <div class="stitle"><h1>Partner servers</h1><p>Official servers that work with YA CLIENT. Join straight from the launcher.</p></div>
+  <div class="g" id="srv"></div>
+  <div class="px dark cta reveal" style="margin-top:44px"><h2>Own a server?</h2><p class="sub" style="color:#bbb">We are looking for partners. Open a Partnership ticket on our Discord.</p><a class="btn big light" id="dc" href="#">Join the Discord</a></div>
+</div></section>
+<script src="/px-config.js"></script><script src="/px.js"></script>
+<script>
+document.getElementById("dc").href=YA.discord;
+loadData("servers").then(async s=>{const el=document.getElementById("srv");
+ el.innerHTML=s.map((v,i)=>`<div class="px card srv reveal"><img id="i${i}" alt="" style="visibility:hidden"><div class="t"><h3>${esc(v.name)}</h3><span id="m${i}">${esc(v.desc||"")}</span><span>${esc(v.host)}</span></div><span class="pill" id="p${i}">...</span></div>`).join("")||'<p class="sub">Partners coming soon.</p>';reveal();
+ s.forEach(async(v,i)=>{try{const r=await fetch("https://api.mcsrvstat.us/3/"+encodeURIComponent(v.host));const d=await r.json();const p=document.getElementById("p"+i);
+  if(d.online){p.textContent=d.players.online+"/"+d.players.max+" online";p.className="pill ok";if(d.icon){const im=document.getElementById("i"+i);im.src=d.icon;im.style.visibility="visible"}}else{p.textContent="offline";p.className="pill bad"}}catch(e){document.getElementById("p"+i).textContent="?"}})});
+</script>
+</body></html>
