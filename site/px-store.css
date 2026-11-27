@@ -1,0 +1,119 @@
+/* YA CLIENT store: the pixel look of the new site, laid over the store's own layout (ya.css). */
+@font-face{font-family:mc;src:url(/px/mc.woff) format("woff");font-display:swap}
+:root{--bg:#ececec;--s1:#ffffff;--s2:#f1f1f1;--line:#111;--line2:#111;--text:#111;--mute:#444;--dim:#777;--red:#111;--acc:#111;--acc-ink:#fff;--glow:transparent;--green:#2c7a3a}
+body,body.plus{--acc:#111;--acc-ink:#fff;--glow:transparent}
+html,body{background:#ececec}
+body{font-family:mc,"Courier New",monospace!important;font-size:19px;line-height:1.35;color:#111;-webkit-font-smoothing:none;
+  background-image:linear-gradient(45deg,#e4e4e4 25%,transparent 25%,transparent 75%,#e4e4e4 75%),linear-gradient(45deg,#e4e4e4 25%,transparent 25%,transparent 75%,#e4e4e4 75%)!important;background-size:16px 16px!important;background-position:0 0,8px 8px!important}
+body::before{display:none!important}
+*{border-radius:0!important;font-family:inherit}
+b,strong,h1,h2,h3,h4{font-weight:400!important}
+h1,h2,h3{text-transform:uppercase;letter-spacing:1px}
+img{image-rendering:auto}
+/* header + footer (same as the main site) */
+nav.top{display:none!important}
+footer:not(.pxf){display:none!important}
+.pxw{max-width:1080px;margin:0 auto;padding:0 24px}
+header.pxh{position:sticky;top:0;z-index:70;background:#111;border-bottom:4px solid #000;box-shadow:0 4px 0 0 #3a3a3a}
+.pxn{display:flex;align-items:center;gap:6px;height:68px}
+.pxb{display:flex;align-items:center;gap:12px;color:#fff!important;font-size:26px;letter-spacing:2px;margin-right:auto;text-decoration:none}
+.pxb img{width:42px;height:42px;margin:0}
+.pxl{display:flex;align-items:center}
+.pxl a.pl{color:#bdbdbd;text-decoration:none;padding:8px 12px;text-transform:uppercase;font-size:17px;letter-spacing:1px;border-bottom:4px solid transparent}
+.pxl a.pl:hover{color:#fff}.pxl a.pl.on{color:#fff;border-bottom-color:#fff}.pxl a.pl.gold{color:#ffd24a}
+.pxbtn{display:inline-block;font-size:16px;text-transform:uppercase;letter-spacing:1px;text-decoration:none;color:#fff;background:#1f1f1f;padding:8px 18px 12px;margin-left:10px;
+  box-shadow:-4px 0 0 0 #000,4px 0 0 0 #000,0 -4px 0 0 #000,0 4px 0 0 #000,inset -4px -6px 0 0 #000,inset 4px 4px 0 0 #5a5a5a}
+.pxburger{display:none;background:none;border:0;color:#fff;font:inherit;font-size:26px;cursor:pointer}
+@media(max-width:1000px){.pxburger{display:block}.pxl{display:none;position:absolute;left:0;right:0;top:68px;background:#111;flex-direction:column;align-items:flex-start;padding:10px 24px 18px;border-bottom:4px solid #000}.pxl.open{display:flex}.pxbtn{display:none}}
+footer.pxf{background:#111;color:#bdbdbd;margin-top:30px;padding:36px 0;border-top:4px solid #000;box-shadow:inset 0 4px 0 #3a3a3a;display:block!important}
+.pxfr{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+footer.pxf a{color:#fff;text-decoration:none;margin-right:18px;font-size:18px;text-transform:uppercase}footer.pxf a:hover{text-decoration:underline}
+footer.pxf small{display:block;margin-top:8px;font-size:15px;color:#8a8a8a}
+/* pixel boxes */
+.pc,.md,.plusbar,.cd,.card,.stats div,.px-steps>div,.px-tbl,.buy,.bd-3d,.stage,.it,.og,.bd-it,.bd-og>*{background:#fff!important;border:0!important;margin:4px;
+  box-shadow:-4px 0 0 0 #111,4px 0 0 0 #111,0 -4px 0 0 #111,0 4px 0 0 #111,inset -4px -4px 0 0 #cdcdcd,inset 4px 4px 0 0 #fff,8px 12px 0 0 rgba(0,0,0,.14)!important;color:#111}
+.pc{transition:transform .12s steps(2)}.pc:hover{transform:translateY(-6px)!important}
+.pc.on{outline:0!important;box-shadow:-4px 0 0 0 #111,4px 0 0 0 #111,0 -4px 0 0 #111,0 4px 0 0 #111,inset 0 0 0 4px #2c7a3a,8px 12px 0 0 rgba(0,0,0,.14)!important}
+.stage,.bd-3d{background:#111!important;box-shadow:-4px 0 0 0 #000,4px 0 0 0 #000,0 -4px 0 0 #000,0 4px 0 0 #000,inset -4px -4px 0 0 #000,inset 4px 4px 0 0 #444,8px 12px 0 0 rgba(0,0,0,.2)!important}
+.stage .cap,.bd-3d .cap{color:#bbb}
+/* page heading, chips */
+.page-h{padding:44px 0 18px}.page-h h1,.page-h h1.plain{font-size:46px;margin:0 0 8px;color:#111}.page-h .sub,.sub{color:#444}
+.chips{gap:10px;margin-bottom:26px}
+.fchip,.btn{font-size:17px!important;text-transform:uppercase;letter-spacing:1px;height:auto!important;padding:9px 18px 13px!important;margin:4px;background:#d0d0d0!important;color:#111!important;border:0!important;cursor:pointer;
+  box-shadow:-4px 0 0 0 #000,4px 0 0 0 #000,0 -4px 0 0 #000,0 4px 0 0 #000,inset -4px -6px 0 0 #7d7d7d,inset 4px 4px 0 0 #fff!important;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.fchip:hover,.btn:hover{background:#e4e4e4!important}
+.fchip.on,.btn.pri,.btn.cta{background:#1f1f1f!important;color:#fff!important;box-shadow:-4px 0 0 0 #000,4px 0 0 0 #000,0 -4px 0 0 #000,0 4px 0 0 #000,inset -4px -6px 0 0 #000,inset 4px 4px 0 0 #5a5a5a!important}
+.fchip.on:hover,.btn.pri:hover{background:#333!important}
+.btn.sm{font-size:14px!important;padding:6px 12px 9px!important}
+.btn.big{font-size:22px!important;padding:14px 30px 18px!important}
+.btn.block{width:calc(100% - 8px)}
+/* product cards */
+.pg{gap:26px}
+.pc .im{background:#111!important}.pc .im.ph{background:#111!important}.pc .im.ph img{-webkit-mask-image:none!important;mask-image:none!important}
+.pc h3{font-size:18px;color:#111}.pc p{font-size:15px;color:#555}
+.pc .pr{margin-top:12px}
+.price{font-size:20px;color:#111}.price s{color:#999;margin-right:8px;font-size:16px}.price.free{color:#2c7a3a}
+.tagb{background:#111!important;color:#fff!important;border:0!important;height:auto!important;padding:3px 9px 5px!important;font-size:13px!important;letter-spacing:1px;top:12px!important;left:12px!important;text-transform:uppercase}
+.tagb.save{background:#2c7a3a!important;color:#fff!important}
+.plusbar{padding:16px 20px;margin:4px 4px 26px;gap:14px}
+.plusbar b{color:#111}.plusbar span{color:#555}
+.plusbar.on{background:#fff7c9!important}.plusbar.on b{color:#111}
+input[type=text],input:not([type]),.pbf input,.skinbox input,#mdu{font:inherit!important;font-size:17px;background:#fff!important;color:#111!important;border:0!important;padding:10px 12px!important;
+  box-shadow:-4px 0 0 0 #111,4px 0 0 0 #111,0 -4px 0 0 #111,0 4px 0 0 #111,inset 3px 3px 0 0 #ddd!important;outline:0;margin:4px}
+.pbf .btn{background:#d0d0d0!important}
+/* checkout modal + cart */
+.mo{background:rgba(0,0,0,.7)!important;backdrop-filter:none!important}
+.md{color:#111}.md h3{font-size:24px;color:#111}.md p,.md .sum{color:#444}.md .err{color:#a02020}
+.md code{background:#f1f1f1;color:#111;border:0}
+.md .x{background:#111!important;color:#fff!important;box-shadow:none!important;padding:2px 10px!important;margin:0}
+.cartfab{background:#1f1f1f!important;color:#fff!important;border:0!important;box-shadow:-4px 0 0 #000,4px 0 0 #000,0 -4px 0 #000,0 4px 0 #000,inset -4px -6px 0 #000,inset 4px 4px 0 #5a5a5a!important}
+.cartfab b{background:#fff!important;color:#000!important}
+.cartdr{background:rgba(0,0,0,.7)!important}.cd{border:0!important;color:#111;margin:0}
+.cd b,.cd span,.cd p{color:#111}
+/* item / bundle hero keeps a dark pixel panel */
+.hero{border-bottom:4px solid #000;box-shadow:0 4px 0 #3a3a3a}
+.hero,.hs,.hero *{--text:#f4f4f4}
+.hero .btn:not(.pri){color:#111!important}
+.bd-h{font-size:30px;margin:44px 0 18px;color:#111}
+.hr,.hf{color:#bbb}
+a{text-decoration:none}
+/* plus page */
+.px-hero::before,.pl-hero::before,.h2::before,.hero::before,.px-hero:before{display:none!important}
+.px-hero{background:#111;color:#fff;border-bottom:4px solid #000;box-shadow:0 4px 0 #3a3a3a}
+.px-hero .sub,.px-hero .hint,.px-hero p{color:#bbb}.px-hero h1{color:#fff}.px-copy h1 span{color:#ffd24a}.px-price{color:#fff}
+.px-tag{background:#ffd24a!important;color:#111!important;box-shadow:none!important}
+.px-sec h2,.px-sec h3,.px-sec p{color:#111}.px-feat .card p{color:#555}
+.px-feat .card,.px-steps>div{background:#fff!important}
+.px-feat .ic,.px-steps em{background:#111!important;border:0!important;color:#fff!important;box-shadow:none!important}
+.px-tbl{overflow:hidden}.px-tbl *{color:#111}.px-tbl i.y{color:#2c7a3a}.px-tbl i.n{color:#999}.px-tbl .pl{color:#a07900}
+.px-cta{background:#111!important;color:#fff;box-shadow:-4px 0 0 #000,4px 0 0 #000,0 -4px 0 #000,0 4px 0 #000,inset -4px -4px 0 #000,inset 4px 4px 0 #444!important}
+.px-cta h2,.px-cta p{color:#fff}
+.buy{background:#fff!important}.buy li,.buy p,.buy h3{color:#111}.buy li svg{color:#2c7a3a}
+.skinbox,.pbf{gap:8px}
+
+/* item / bundle: the hero stays a dark panel, the rest is the light pixel page */
+.hero .hback{background:#1f1f1f!important;color:#fff!important;border:0!important;padding:8px 14px!important;box-shadow:-4px 0 0 #000,4px 0 0 #000,0 -4px 0 #000,0 4px 0 #000,inset -3px -4px 0 #000,inset 3px 3px 0 #5a5a5a!important}
+.hero .ht{font-size:56px;text-transform:uppercase;letter-spacing:1px}
+.hero .btn:not(.pri){background:#d0d0d0!important;color:#111!important}
+.hero .hbl{color:#bbb}
+.bd-items{gap:18px}
+.bd-it,.bd-items>*{background:#fff!important;color:#111}
+.bd-it *,.bd-items>* *{color:#111}
+.bd-og>*{background:#fff!important;color:#111}
+.bd-og *{color:#111}
+.cd,.cd *{color:#111}.cd .ch{border-bottom:4px solid #111!important}
+.cd button{font-size:15px}
+/* cards that show the character renders stay dark so the picture sits in a frame */
+.bd-items>*,.bd-it,.bd-og>*{background:#111!important;color:#fff!important;box-shadow:-4px 0 0 0 #000,4px 0 0 0 #000,0 -4px 0 0 #000,0 4px 0 0 #000,inset -4px -4px 0 0 #000,inset 4px 4px 0 0 #444,8px 12px 0 0 rgba(0,0,0,.2)!important}
+.bd-items>* *,.bd-it *,.bd-og>* *{color:#fff!important}
+.bd-items .btn,.bd-it .btn,.bd-og .btn{color:#111!important}
+.bd-items .btn.pri,.bd-it .btn.pri{color:#fff!important}
+.bd-og .price,.bd-og .price.free{background:#fff!important;color:#111!important}
+.bd-items .btn,.bd-it .btn{font-size:14px!important;padding:8px 8px 12px!important;margin:3px}
+/* single cape page */
+.capepage{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:34px;align-items:start;padding-bottom:30px}
+.cp-info .cp-box{background:#fff;padding:26px;box-shadow:-4px 0 0 0 #111,4px 0 0 0 #111,0 -4px 0 0 #111,0 4px 0 0 #111,inset -4px -4px 0 0 #cdcdcd,8px 12px 0 0 rgba(0,0,0,.14);margin:4px}
+.cp-box h2{font-size:30px;margin:16px 0 10px;color:#111}.cp-box p{color:#444;margin-bottom:14px}
+.cp-list{list-style:none;padding:0;margin:0 0 22px}.cp-list li{padding:6px 0 6px 22px;position:relative;color:#111;font-size:17px}.cp-list li::before{content:"";position:absolute;left:0;top:13px;width:10px;height:10px;background:#111}
+.capepage .skinbox{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.capepage .skinbox input{flex:1;min-width:140px}.capepage .skmsg{width:100%;color:#444;font-size:15px}
+@media(max-width:900px){.capepage{grid-template-columns:1fr}}
