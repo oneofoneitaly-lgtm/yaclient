@@ -1,13 +1,13 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Store - YA CLIENT</title><meta name="description" content="The YA CLIENT store. The first cape is free for every player."><link rel="icon" href="/px/favicon.png"><link rel="stylesheet" href="/ya.css?v=40"><link rel="stylesheet" href="/px-store.css?v=3"></head><body>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Store - YA CLIENT</title><meta name="description" content="The YA CLIENT store. The first cape is free for every player."><link rel="icon" href="/px/favicon.png"><link rel="stylesheet" href="/ya.css?v=40"><link rel="stylesheet" href="/px-store.css?v=4"></head><body>
 <div class="page-h"><div class="wrap"><h1 class="plain">Store</h1><p class="sub">Cosmetics for YA CLIENT. Click an item to see it in 3D on your skin.</p></div></div>
 <div class="wrap">
 <div class="chips" id="chips"><button class="fchip on">Cloaks</button></div>
 <div class="pg" id="grid">
-<div class="pc" id="c1" data-k="ya_cape"><span class="tagb save">Free</span><div class="im" id="im1"></div><div class="bd"><h3>YA Cape</h3><p>The first YA CLIENT cape: white 3D cape with a thick edge and the black YA logo. Free for every player.</p><div class="pr"><span class="price free">Free</span><a class="btn sm" href="/download" data-get="1">Get free</a></div></div></div>
+<div class="pc" id="c1" data-k="ya_cape"><span class="tagb save">Free</span><div class="im" id="im1"></div><div class="bd"><h3>YA Cape</h3><p>The first YA CLIENT cape: white 3D cape with a thick edge and the black YA logo. Free for every player.</p><div class="pr"><span class="price free">Free</span><button class="btn sm" data-claim="ya_cape" data-title="YA Cape">Get free</button></div></div></div>
 </div></div>
-<script src="/config.js"></script><script src="/px-nav.js"></script><script src="/geo.js"></script><script src="/cos3d.js"></script><script>
+<script src="/config.js"></script><script src="/px-nav.js"></script><script src="/claim.js"></script><script src="/geo.js"></script><script src="/cos3d.js"></script><script>
 (function(){
-document.getElementById('c1').addEventListener('click',function(e){if(e.target.closest('[data-get]'))return;location.href='/item?i=ya_cape'});
+document.getElementById('c1').addEventListener('click',function(e){iflocation.href='/item?i=ya_cape'});
 var im=document.getElementById('im1');
 if(window.YA3D&&YA3D.ok()){YA3D.whenReady(function(){var u=YA3D.snapshot(['ya_cape'],{yaw:.5,dist:3.7,target:[0,.95,0]});if(u)im.innerHTML='<img src="'+u+'" alt="YA Cape">'})}
 })();
