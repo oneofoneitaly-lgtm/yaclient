@@ -544,6 +544,28 @@ export async function onRequest({ request, env }) {
       await env.DB.delete('k:' + id);
       return send(200, { ok: 1, uuid: id });
     }
+    if (route === 'POST /v1/claim') {
+      // free items anybody can claim by typing their Minecraft name (only the first YA Cape for now)
+      const FREE = ['ya_cape'];
+      const f = await form(request);
+      const name = String(f.username || '').trim();
+      const item = f.item || 'ya_cape';
+      if (!/^[A-Za-z0-9_]{3,16}$/.test(name)) return send(400, { error: 'invalid name' });
+      if (!FREE.includes(item)) return send(400, { error: 'not free' });
+      const ip = request.headers.get('cf-connecting-ip') || 'x';
+      const rk = 'r:claim:' + ip;
+      const n = parseInt((await env.DB.get(rk)) || '0', 10) + 1;
+      if (n > 15) return send(429, { error: 'too many tries, wait a few minutes' });
+      await env.DB.put(rk, String(n), { expirationTtl: 600 });
+      const prof = await getJson('https://api.mojang.com/users/profiles/minecraft/' + encodeURIComponent(name));
+      if (!prof || !prof.id) return send(404, { error: 'unknown username' });
+      const uuid = norm(prof.id);
+      const p = await loadPlayer(env, uuid);
+      if (!p.owned.includes(item)) p.owned.push(item);
+      if (!p.equipped.cape) p.equipped.cape = item;
+      await savePlayer(env, uuid, p);
+      return send(200, { ok: 1, name: prof.name || name, uuid, item });
+    }
     if (route === 'POST /v1/admin/grant') {
       if (!env.ADMIN_KEY || request.headers.get('x-admin-key') !== env.ADMIN_KEY) return send(403, { error: 'forbidden' });
       const f = await form(request);
