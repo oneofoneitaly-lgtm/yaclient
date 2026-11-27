@@ -15,7 +15,7 @@ function open(item,title){
     fetch('/v1/claim',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:'username='+encodeURIComponent(n)+'&item='+item}).then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})}).then(function(x){
       btn.disabled=false;
       if(x.ok){try{localStorage.setItem('ya_skin_name',x.j.name)}catch(e){}msg.className='cl-msg ok';msg.innerHTML='Done! The '+title+' is now on <b>'+x.j.name+'</b>. Open YA CLIENT and join a world: you will wear it.<br><a class="btn sm" href="/download" style="margin-top:12px">Download YA CLIENT</a>'}
-      else{msg.className='cl-msg err';msg.textContent=x.j.error==='unknown username'?'That Minecraft name does not exist.':(x.j.error||'Something went wrong, try again.')}
+      else{msg.className='cl-msg err';msg.textContent=x.j.error==='unknown username'?'We could not find that Minecraft name. Check the spelling and try again in a minute.':(x.j.error||'Something went wrong, try again.')}
     }).catch(function(){btn.disabled=false;msg.className='cl-msg err';msg.textContent='Could not reach the server, try again.'});
   });
 }

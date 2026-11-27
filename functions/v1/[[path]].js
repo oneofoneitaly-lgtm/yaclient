@@ -122,6 +122,18 @@ async function form(request) {
 async function getJson(url) {
   try { const r = await fetch(url, { headers: { 'user-agent': 'YA-CLIENT-Store' } }); return r.ok ? await r.json() : null; } catch (_) { return null; }
 }
+// name -> uuid. Mojang sometimes refuses requests that come from Cloudflare, so several services are tried in turn.
+async function resolveMc(name) {
+  const e = encodeURIComponent(name);
+  const tries = [
+    async () => { const j = await getJson('https://api.mojang.com/users/profiles/minecraft/' + e); return j && j.id ? { id: j.id, name: j.name } : null; },
+    async () => { const j = await getJson('https://playerdb.co/api/player/minecraft/' + e); const pl = j && j.data && j.data.player; return pl && pl.id ? { id: pl.id, name: pl.username } : null; },
+    async () => { const j = await getJson('https://api.ashcon.app/mojang/v2/user/' + e); return j && j.uuid ? { id: j.uuid, name: j.username } : null; },
+    async () => { const j = await getJson('https://api.minetools.eu/uuid/' + e); return j && j.id && j.id !== 'null' ? { id: j.id, name: j.name } : null; }
+  ];
+  for (const t of tries) { try { const r = await t(); if (r) return r; } catch (_) {} }
+  return null;
+}
 async function loadPlayer(env, uuid) {
   const v = (await env.DB.get('p:' + uuid, { type: 'json', cacheTtl: 30 })) || { owned: [], equipped: {} };
   v._tmp = [];
@@ -557,9 +569,12 @@ export async function onRequest({ request, env }) {
       const n = parseInt((await env.DB.get(rk)) || '0', 10) + 1;
       if (n > 15) return send(429, { error: 'too many tries, wait a few minutes' });
       await env.DB.put(rk, String(n), { expirationTtl: 600 });
-      const prof = await getJson('https://api.mojang.com/users/profiles/minecraft/' + encodeURIComponent(name));
-      if (!prof || !prof.id) return send(404, { error: 'unknown username' });
-      const uuid = norm(prof.id);
+      let uuid = await resolveName(env, name);
+      let shown = name;
+      if (!uuid) { const alt = await resolveMc(name); if (alt) { uuid = norm(alt.id); shown = alt.name || name; } }
+      if (!uuid) return send(404, { error: 'unknown username' });
+      uuid = norm(uuid);
+      const prof = { name: shown };
       const p = await loadPlayer(env, uuid);
       if (!p.owned.includes(item)) p.owned.push(item);
       if (!p.equipped.cape) p.equipped.cape = item;
